@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 
@@ -23,13 +24,14 @@ abstract class BaseActivity<VB: ViewBinding>(
     /**
      * Lazily initialized ViewBinding instance.
      */
-    private val binding: VB by lazy {
+    val binding: VB by lazy {
         inflate.invoke(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     override fun onStart() {
