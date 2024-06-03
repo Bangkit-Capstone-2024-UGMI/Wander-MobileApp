@@ -3,14 +3,30 @@ package academy.bangkit.wander.presentation.login
 import academy.bangkit.wander.core.base.BaseActivity
 import academy.bangkit.wander.databinding.ActivityLoginBinding
 import academy.bangkit.wander.presentation.ViewModelFactory
+import academy.bangkit.wander.presentation.home.HomeActivity
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Matrix
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance()
+    }
+
+    private val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            viewModel.handleActivityResult(data)
+        } else {
+            showMessage("Sign in failed")
+        }
     }
 
     override fun ActivityLoginBinding.initialBinding() {
@@ -18,12 +34,37 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         setupAction()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.checkCurrentUser()
+    }
+
     private fun setupAction() {
-        TODO("Not yet implemented")
+        binding.button.setOnClickListener{
+            viewModel.signIn()
+        }
     }
 
     private fun setupView() {
         setupBackground()
+
+        viewModel.initialize(this, activityResultLauncher)
+
+        viewModel.currentUser.observe(this) { user ->
+            updateUI(user)
+        }
+
+        viewModel.signInFailure.observe(this) { exception ->
+            showMessage(exception?.message ?: "Sign in failed")
+        }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+            showMessage("Welcome, ${user.displayName}")
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
     }
 
     private fun setupBackground() {

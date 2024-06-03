@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "359149054900",
+    "project_id": "wander-6e6c6",
+    "storage_bucket": "wander-6e6c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359149054900:android:0c1ed2b9a8b0a0c288e0e1",
+        "android_client_info": {
+          "package_name": "academy.bangkit.wander"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359149054900-tulpd31lv9sstt4n1pl69i84o5812l3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "academy.bangkit.wander",
+            "certificate_hash": "47b5c0567c8fe46aed15e0dab5f50335761a6dd7"
+          }
+        },
+        {
+          "client_id": "359149054900-2bpclk0e7jcluiqndsc6rsda0onbac98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkSnc3IG1wkgjHEdf86SArst07ONlqlO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359149054900-2bpclk0e7jcluiqndsc6rsda0onbac98.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

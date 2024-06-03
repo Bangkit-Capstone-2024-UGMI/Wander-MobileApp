@@ -59,7 +59,7 @@ abstract class BaseActivity<VB: ViewBinding>(
      *
      * @param message The message to display in the toast.
      */
-    private fun showMessage(message: String?) {
+    protected fun showMessage(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
