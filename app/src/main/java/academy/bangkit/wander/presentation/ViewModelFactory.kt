@@ -1,7 +1,7 @@
 package academy.bangkit.wander.presentation
 
 import academy.bangkit.wander.data.repository.AuthRepository
-import academy.bangkit.wander.presentation.home.HomeViewModel
+import academy.bangkit.wander.presentation.main.MainViewModel
 import academy.bangkit.wander.presentation.login.LoginViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -17,8 +17,8 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(authRepository) as T
             }
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(authRepository) as T
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(authRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

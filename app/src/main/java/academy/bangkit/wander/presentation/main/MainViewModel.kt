@@ -1,4 +1,4 @@
-package academy.bangkit.wander.presentation.home
+package academy.bangkit.wander.presentation.main
 
 import academy.bangkit.wander.data.repository.AuthRepository
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 
-class HomeViewModel(
+class MainViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 

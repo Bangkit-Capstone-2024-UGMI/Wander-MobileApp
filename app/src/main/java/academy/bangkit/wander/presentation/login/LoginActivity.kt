@@ -3,7 +3,7 @@ package academy.bangkit.wander.presentation.login
 import academy.bangkit.wander.core.base.BaseActivity
 import academy.bangkit.wander.databinding.ActivityLoginBinding
 import academy.bangkit.wander.presentation.ViewModelFactory
-import academy.bangkit.wander.presentation.home.HomeActivity
+import academy.bangkit.wander.presentation.main.MainActivity
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Matrix
@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     private fun setupAction() {
-        binding.button.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             viewModel.signIn()
         }
     }
@@ -62,7 +62,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             showMessage("Welcome, ${user.displayName}")
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
