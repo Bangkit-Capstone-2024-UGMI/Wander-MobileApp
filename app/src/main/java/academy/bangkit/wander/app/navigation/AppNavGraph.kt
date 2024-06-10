@@ -1,6 +1,7 @@
 package academy.bangkit.wander.app.navigation
 
 import academy.bangkit.wander.presentation.myplan.MyPlanScreen
+import academy.bangkit.wander.presentation.search.WanderScreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,7 +27,7 @@ class AppRoute {
 @Composable
 fun AppNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "wander") {
-        composable(AppRoute.WANDER) { DefaultScreen("Wander") }
+        composable(AppRoute.WANDER) { WanderScreen() }
         composable(AppRoute.MY_PLAN){ MyPlanScreen() }
         composable(AppRoute.FAVORITE) { DefaultScreen("Favorite") }
         composable(AppRoute.ACCOUNT) { DefaultScreen("Account") }
