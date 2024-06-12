@@ -49,4 +49,5 @@
     <string name="welcome_to_wander">Welcome to Wander</string>
     <string name="default_web_client_id">359149054900-tulpd31lv9sstt4n1pl69i84o5812l3d.apps.googleusercontent.com</string>
     <string name="logout">Logout</string>
+    <string name="content_description">Foto Profil</string>
 </resources>
