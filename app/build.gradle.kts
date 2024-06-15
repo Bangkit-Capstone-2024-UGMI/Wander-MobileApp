@@ -78,4 +78,6 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
     implementation("androidx.compose.runtime:runtime-livedata")
+
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }

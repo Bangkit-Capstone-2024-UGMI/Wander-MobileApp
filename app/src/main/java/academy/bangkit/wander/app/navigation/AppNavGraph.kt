@@ -1,6 +1,6 @@
 package academy.bangkit.wander.app.navigation
 
-import academy.bangkit.wander.presentation.myplan.MyPlanScreen
+import academy.bangkit.wander.presentation.myplan.home.MyPlanScreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
