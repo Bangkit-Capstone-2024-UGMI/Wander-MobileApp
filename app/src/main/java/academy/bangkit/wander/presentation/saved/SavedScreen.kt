@@ -2,6 +2,7 @@ package academy.bangkit.wander.presentation.saved
 
 import academy.bangkit.wander.R
 import academy.bangkit.wander.app.widgets.MyTopAppBar
+import academy.bangkit.wander.presentation.saved.widgets.SavedCardItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -39,15 +40,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 
 @Preview(showBackground = true)
 @Composable
 fun SavedScreen() {
+    val navController = rememberNavController()
     val items = remember {
         mutableStateListOf(
-            CardItem(1, "Favorites", R.drawable.star),
-            CardItem(2, "Want to Go", R.drawable.calendar), // Replace with actual drawable resource
-            CardItem(3, "Travel", R.drawable.plane) // Replace with actual drawable resource
+            SavedCardItem(1, "Favorites", R.drawable.star),
+            SavedCardItem(2, "Want to Go", R.drawable.calendar), // Replace with actual drawable resource
+            SavedCardItem(3, "Travel", R.drawable.plane) // Replace with actual drawable resource
         )
     }
 
@@ -82,14 +85,16 @@ fun SavedScreen() {
 
             Spacer(modifier = Modifier.size(22.dp))
 
-            CardList(items = items)
+            CardList(items = items) { selectedItem ->
+                navController.navigate("placesList/${selectedItem.title}")
+            }
 
             // Pass availableIcons to AddCardDialog
             if (showDialog.value) {
                 AddCardDialog(
                     availableIcons = availableIcons,
                     onAdd = { newTitle, selectedIcon ->
-                        val newCard = CardItem(
+                        val newCard = SavedCardItem(
                             id = items.size + 1,
                             title = newTitle,
                             iconResource = selectedIcon
@@ -120,14 +125,13 @@ fun NewListButton(onClick: () -> Unit) {
 }
 
 @Composable
-fun CardList(items: List<CardItem>) {
+fun CardList(items: List<SavedCardItem>, onItemClick: (SavedCardItem) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
     ) {
         items(items) { item ->
             SavedCard(item = item) {
-                // Handle card click
-                println("Clicked on ${item.title}")
+                onItemClick(item)
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -135,7 +139,7 @@ fun CardList(items: List<CardItem>) {
 }
 
 @Composable
-fun SavedCard(item: CardItem, onClick: (CardItem) -> Unit) {
+fun SavedCard(item: SavedCardItem, onClick: (SavedCardItem) -> Unit) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = Modifier
