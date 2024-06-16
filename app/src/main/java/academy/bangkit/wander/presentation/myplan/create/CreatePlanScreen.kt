@@ -1,5 +1,6 @@
 package academy.bangkit.wander.presentation.myplan.create
 
+import academy.bangkit.wander.app.navigation.AppRoute
 import academy.bangkit.wander.app.theme.AppColor
 import academy.bangkit.wander.app.widgets.MyButton
 import academy.bangkit.wander.app.widgets.MyTextField
@@ -56,7 +57,7 @@ fun CreatePlanScreen(navController: NavHostController) {
             ) {
                 MyButton(
                     text = "Find Hotels",
-                    onClick = { }
+                    onClick = {navController.navigate(AppRoute.HOTEL_LIST)}
                 )
             }
         }
@@ -111,7 +112,7 @@ fun CreatePlanScreen(navController: NavHostController) {
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
                         MyButton(
                             text = "Add a Destination",
                             onClick = { viewModel.addDestination("")},

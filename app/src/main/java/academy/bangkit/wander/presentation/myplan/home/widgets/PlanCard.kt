@@ -1,12 +1,13 @@
 package academy.bangkit.wander.presentation.myplan.home.widgets
 
 import academy.bangkit.wander.R
+import academy.bangkit.wander.app.theme.AppColor
 import academy.bangkit.wander.data.model.Plan
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
 @Composable
@@ -37,7 +41,9 @@ fun PlanCard(data: Plan) {
         )
         .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(size = 8.dp))) {
         Row (
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -54,29 +60,35 @@ fun PlanCard(data: Plan) {
             }
             Column(
                 modifier = Modifier
-                    .padding(start = 24.dp, top = 2.dp, bottom = 2.dp)
+                    .padding(start = 24.dp)
                     .weight(1f),
-                verticalArrangement = Arrangement.SpaceBetween
-
             ) {
                  Text(
                      text = data.name,
+                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = AppColor.PrimaryDark)
                  )
+                 Spacer(modifier = Modifier.size(6.dp))
                  Text(
                      text = data.location,
+                     style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                  )
+                Spacer(modifier = Modifier.size(6.dp))
+
                 Text(
                     text = data.date,
+                    style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                 )
             }
              IconButton(
                  onClick = { /*TODO*/ },
-                 modifier = Modifier.size(40.dp).padding(end = 16.dp)
+                 modifier = Modifier
+                     .size(40.dp)
+                     .padding(end = 16.dp)
              ) {
                  Icon(
                      painter = painterResource(id = R.drawable.ic_share),
                      contentDescription = "Share Icon",
-                     tint = Color(0xFF000000)
+                     tint = AppColor.PrimaryDark
                  )
              }
         }

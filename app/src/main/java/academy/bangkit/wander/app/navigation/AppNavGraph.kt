@@ -2,6 +2,7 @@ package academy.bangkit.wander.app.navigation
 
 import academy.bangkit.wander.presentation.main.MainScreen
 import academy.bangkit.wander.presentation.myplan.create.CreatePlanScreen
+import academy.bangkit.wander.presentation.myplan.create.hotels.HotelListScreen
 import academy.bangkit.wander.presentation.myplan.home.MyPlanScreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ class AppRoute {
         const val ACCOUNT = "account"
 
         const val CREATE_PLAN = "my_plan/create"
+        const val HOTEL_LIST = "my_plan/create/hotel_list"
     }
 }
 
@@ -45,6 +47,7 @@ fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main") {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) {CreatePlanScreen(navController)}
+        composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController)}
     }
 }
 
