@@ -5,6 +5,7 @@ import academy.bangkit.wander.data.repository.PlanRepository
 import academy.bangkit.wander.di.Injection
 import academy.bangkit.wander.presentation.main.MainViewModel
 import academy.bangkit.wander.presentation.login.LoginViewModel
+import academy.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
 import academy.bangkit.wander.presentation.myplan.home.HomePlanViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(HomePlanViewModel::class.java) -> {
                 HomePlanViewModel(planRepository) as T
+            }
+            modelClass.isAssignableFrom(CreatePlanViewModel::class.java) -> {
+                CreatePlanViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
