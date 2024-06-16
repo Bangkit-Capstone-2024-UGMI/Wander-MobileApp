@@ -63,12 +63,12 @@ fun PlaceDetailScreen(place: Place, navigateBack: () -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Header image with back button
+        
         item {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth() // Ensure the image spans the full width
-                    .height(250.dp) // Adjust the height as needed
+                    .fillMaxWidth()
+                    .height(250.dp)
             ) {
                 Image(
                     painter = painterResource(id = place.imageResource),
@@ -78,7 +78,6 @@ fun PlaceDetailScreen(place: Place, navigateBack: () -> Unit) {
                     contentScale = ContentScale.Crop
                 )
 
-                // Overlay for back arrow
                 IconButton(
                     onClick = { navigateBack() },
                     modifier = Modifier
@@ -92,7 +91,6 @@ fun PlaceDetailScreen(place: Place, navigateBack: () -> Unit) {
             }
         }
 
-        // Padding for the content below the image
         item {
             Spacer(modifier = Modifier.height(16.dp))
             Column(
@@ -109,7 +107,7 @@ fun PlaceDetailScreen(place: Place, navigateBack: () -> Unit) {
 
                 // Buttons for directions
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Adjust spacing between buttons as needed
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Button(
@@ -154,7 +152,7 @@ fun PlaceDetailScreen(place: Place, navigateBack: () -> Unit) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(16.dp)) // Adjust vertical spacing between rows
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

@@ -4,7 +4,7 @@ data class Place(
     val id: Int,
     val name: String,
     val location: String,
-    val imageResource: Int, // Resource ID for the image
+    val imageResource: Int,
     val description: String,
     val moreImages: List<Int>
 )

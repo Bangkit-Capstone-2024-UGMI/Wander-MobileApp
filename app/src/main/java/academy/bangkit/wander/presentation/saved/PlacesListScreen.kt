@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun PlacesListScreenPreview() {
     PlacesListScreen(
-        categoryTitle = "Category A", // Default preview parameter
-        navigateBack = {} // No-op navigateBack function for preview
+        categoryTitle = "Category A",
+        navigateBack = {}
     )
 }
 
@@ -83,14 +83,13 @@ fun PlacesListScreen(
                 R.drawable.location,
                 R.drawable.location
             )),
-            // Add more places as needed
         )
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp) // Add padding for content separation
+            .padding(16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -107,7 +106,6 @@ fun PlacesListScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Displaying cards in rows with two cards side by side
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -118,10 +116,10 @@ fun PlacesListScreen(
                 ) {
                     for (place in pairOfPlaces) {
                         PlaceCard(place = place)
-                        Spacer(modifier = Modifier.width(8.dp)) // Adjust spacing between cards
+                        Spacer(modifier = Modifier.width(8.dp))
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp)) // Adjust spacing between rows
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }
