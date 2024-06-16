@@ -2,10 +2,8 @@ package academy.bangkit.wander.presentation.main
 
 import academy.bangkit.wander.app.navigation.AppNavGraph
 import academy.bangkit.wander.app.navigation.AppRoute
-import academy.bangkit.wander.app.theme.M3BottomNavigationTheme
 import academy.bangkit.wander.app.widgets.BottomNavigationItem
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
@@ -19,11 +17,9 @@ import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,7 +32,7 @@ import androidx.navigation.NavHostController
 @Composable
 fun MainScreen(navController: NavHostController, mainNavController: NavHostController) {
 
-    M3BottomNavigationTheme {
+
         val items = listOf(
             BottomNavigationItem(
                 title = "Wander",
@@ -70,11 +66,7 @@ fun MainScreen(navController: NavHostController, mainNavController: NavHostContr
         var selectedItemIndex by rememberSaveable {
             mutableIntStateOf(0)
         }
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            Scaffold(
+        Scaffold(
                 bottomBar = {
                     NavigationBar {
                         items.forEachIndexed { index, item ->
@@ -120,5 +112,4 @@ fun MainScreen(navController: NavHostController, mainNavController: NavHostContr
                 }
             }
         }
-    }
-}
+
