@@ -1,6 +1,7 @@
 package academy.bangkit.wander.presentation.main
 
 import academy.bangkit.wander.app.navigation.AppNavGraph
+import academy.bangkit.wander.app.navigation.AppNavigation
 import academy.bangkit.wander.app.navigation.AppRoute
 import academy.bangkit.wander.app.theme.M3BottomNavigationTheme
 import academy.bangkit.wander.app.widgets.BottomNavigationItem
@@ -43,7 +44,7 @@ import androidx.navigation.compose.rememberNavController
 class MainActivity : ComponentActivity() {
 
     private val viewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(this)
     }
     override fun onStart() {
         super.onStart()
@@ -64,91 +65,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setupAction()
         setContent {
-            M3BottomNavigationTheme {
-                val items = listOf(
-                    BottomNavigationItem(
-                        title = "Wander",
-                        selectedIcon = Icons.Filled.Place,
-                        unselectedIcon = Icons.Outlined.Place,
-                        hasNews = false,
-                        routeName = AppRoute.WANDER
-                    ),
-                    BottomNavigationItem(
-                        title = "My Plan",
-                        selectedIcon = Icons.Filled.Create,
-                        unselectedIcon = Icons.Outlined.Create,
-                        hasNews = false,
-                        routeName = AppRoute.MY_PLAN
-                    ),
-                    BottomNavigationItem(
-                        title = "Favorite",
-                        selectedIcon = Icons.Filled.Favorite,
-                        unselectedIcon = Icons.Outlined.FavoriteBorder,
-                        hasNews = false,
-                        routeName = AppRoute.FAVORITE
-                    ),
-                    BottomNavigationItem(
-                        title = "Account",
-                        selectedIcon = Icons.Filled.Person,
-                        unselectedIcon = Icons.Outlined.Person,
-                        hasNews = false,
-                        routeName = AppRoute.ACCOUNT
-                    ),
-                )
-                var selectedItemIndex by rememberSaveable {
-                    mutableIntStateOf(0)
-                }
-                val navController = rememberNavController()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Scaffold(
-                        bottomBar = {
-                            NavigationBar {
-                                items.forEachIndexed { index, item ->
-                                    NavigationBarItem(
-                                        selected = selectedItemIndex == index,
-                                        onClick = {
-                                            selectedItemIndex = index
-                                            navController.navigate(item.routeName)
-                                        },
-                                        label = {
-                                            Text(text = item.title)
-                                        },
-                                        alwaysShowLabel = false,
-                                        icon = {
-                                            BadgedBox(
-                                                badge = {
-                                                    if(item.badgeCount != null) {
-                                                        Badge {
-                                                            Text(text = item.badgeCount.toString())
-                                                        }
-                                                    } else if(item.hasNews) {
-                                                        Badge()
-                                                    }
-                                                }
-                                            ) {
-                                                Icon(
-                                                    imageVector = if (index == selectedItemIndex) {
-                                                        item.selectedIcon
-                                                    } else item.unselectedIcon,
-                                                    contentDescription = item.title
-                                                )
-                                            }
-                                        }
-                                    )
-                                }
-                            }
-                        }
-                    ) {
-                        paddingValues ->
-                            Box(modifier = Modifier.padding(paddingValues)) {
-                                AppNavGraph(navController = navController)
-                            }
-                    }
-                }
-            }
+            AppNavigation(navController = rememberNavController())
         }
     }
 }

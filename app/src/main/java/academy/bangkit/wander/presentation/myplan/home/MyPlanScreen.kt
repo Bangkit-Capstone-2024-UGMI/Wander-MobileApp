@@ -2,7 +2,7 @@ package academy.bangkit.wander.presentation.myplan.home
 
 import academy.bangkit.wander.R
 import academy.bangkit.wander.app.widgets.MyTopAppBar
-import academy.bangkit.wander.data.dummy.PlanData
+import academy.bangkit.wander.presentation.ViewModelFactory
 import academy.bangkit.wander.presentation.myplan.home.widgets.PlanList
 import academy.bangkit.wander.presentation.myplan.home.widgets.SearchBox
 import androidx.compose.foundation.Image
@@ -13,15 +13,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 
-@Preview
 @Composable
-fun MyPlanScreen() {
+fun MyPlanScreen(navController: NavHostController) {
+    val context = LocalContext.current
+    val viewModel: HomePlanViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
+    val planList by viewModel.getPlanList().observeAsState(initial = emptyList())
+
     Scaffold(
         topBar = {
             MyTopAppBar(title = "My Plan")
@@ -47,7 +56,7 @@ fun MyPlanScreen() {
                     ) {
                         SearchBox()
                     }
-                    PlanList(PlanData.getEmptyData())
+                    PlanList(planList, navController)
                 }
             }
     }

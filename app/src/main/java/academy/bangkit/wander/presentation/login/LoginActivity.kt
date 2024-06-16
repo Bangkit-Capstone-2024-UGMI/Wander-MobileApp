@@ -10,12 +10,12 @@ import android.graphics.Matrix
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
-
     private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(this)
     }
 
     private val activityResultLauncher = registerForActivityResult(

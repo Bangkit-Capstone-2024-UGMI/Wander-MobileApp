@@ -1,14 +1,19 @@
 package academy.bangkit.wander.presentation
 
 import academy.bangkit.wander.data.repository.AuthRepository
+import academy.bangkit.wander.data.repository.PlanRepository
+import academy.bangkit.wander.di.Injection
 import academy.bangkit.wander.presentation.main.MainViewModel
 import academy.bangkit.wander.presentation.login.LoginViewModel
+import academy.bangkit.wander.presentation.myplan.home.HomePlanViewModel
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 
 class ViewModelFactory(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val planRepository: PlanRepository,
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -20,6 +25,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(authRepository) as T
             }
+            modelClass.isAssignableFrom(HomePlanViewModel::class.java) -> {
+                HomePlanViewModel(planRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -28,11 +36,12 @@ class ViewModelFactory(
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
         @JvmStatic
-        fun getInstance(): ViewModelFactory {
+        fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
                     INSTANCE = ViewModelFactory(
-                        AuthRepository
+                        Injection.provideAuthRepository(context),
+                        Injection.providePlanRepository(context)
                     )
                 }
             }

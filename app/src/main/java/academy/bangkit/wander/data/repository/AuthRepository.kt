@@ -9,15 +9,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-object AuthRepository {
+class AuthRepository(
+    private val authService: FirebaseAuth
+) {
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     fun getCurrentUser(): FirebaseUser? {
-        return auth.currentUser
+        return authService.currentUser
     }
 
-    fun firebaseAuthWithGoogle(idToken: String) = auth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null))
+    fun firebaseAuthWithGoogle(idToken: String) = authService.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null))
 
     fun getGoogleSignInClient(context: Context): GoogleSignInClient {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -29,6 +30,19 @@ object AuthRepository {
     }
 
     fun signOut() {
-        auth.signOut()
+        authService.signOut()
+    }
+
+    companion object {
+        @Volatile
+        private var instance: AuthRepository? = null
+        fun getInstance(
+            authService: FirebaseAuth
+        ): AuthRepository =
+            instance ?: synchronized(this) {
+                instance ?: AuthRepository(
+                    authService = authService,
+                )
+            }.also { instance = it }
     }
 }
