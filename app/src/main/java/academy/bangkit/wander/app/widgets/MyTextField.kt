@@ -17,11 +17,12 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun MyTextField(
-    label : String?,
-    placeholder: String,
+    label : String? = null,
+    placeholder: String? = null,
     value : String,
-    onValueChange : (String) -> Unit,
-    icon: @Composable (() -> Unit)? = null
+    onValueChange : (String) -> Unit = {},
+    icon: @Composable (() -> Unit)? = null,
+    readOnly: Boolean = false
 ) {
     Column (
         modifier = Modifier.fillMaxWidth()
@@ -38,6 +39,7 @@ fun MyTextField(
             Spacer(modifier = Modifier.height(8.dp))
         }
         OutlinedTextField(
+            readOnly = readOnly,
             shape = CircleShape,
             modifier = Modifier
                 .fillMaxWidth(),
@@ -47,7 +49,7 @@ fun MyTextField(
             },
             placeholder = {
                 Text(
-                    text = placeholder,
+                    text = placeholder?:"",
                     style = TextStyle(color = AppColor.PrimaryDarkVariant)
                 )
             },

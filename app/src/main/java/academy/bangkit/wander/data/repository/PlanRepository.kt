@@ -9,6 +9,8 @@ class PlanRepository (
 ) {
     fun getPlanList(): LiveData<List<Plan>> = planService.getPlanList()
 
+    fun getPlanById(id: String): Plan? = planService.getPlanById(id)
+
     companion object {
         @Volatile
         private var instance: PlanRepository? = null

@@ -11,55 +11,36 @@ class FakePlanService {
     init {
         planList.value = listOf(
             Plan(
-                "Bali",
+                "1",
+                "Bali 1",
                 "Bali, Indonesia",
                 "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
                 "2021-10-10"
             ),
             Plan(
-                "Bali",
+                "2",
+                "Bali 2",
                 "Bali, Indonesia",
                 "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
                 "2021-10-10"
             ),
             Plan(
-                "Bali",
+                "3",
+                "Bali 3",
                 "Bali, Indonesia",
                 "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
                 "2021-10-10"
             ),
             Plan(
-                "Bali",
+                "4",
+                "Bali 4",
                 "Bali, Indonesia",
                 "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
                 "2021-10-10"
             ),
             Plan(
-                "Bali",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "Bali",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "Bali",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "Bali",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "Bali",
+                "5",
+                "Bali 5",
                 "Bali, Indonesia",
                 "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
                 "2021-10-10"
@@ -69,6 +50,9 @@ class FakePlanService {
 
     fun getPlanList(): LiveData<List<Plan>> {
         return planList
+    }
 
+    fun getPlanById(id: String): Plan? {
+        return planList.value?.find { it.id == id }
     }
 }

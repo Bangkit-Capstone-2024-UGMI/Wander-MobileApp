@@ -11,6 +11,10 @@ class HomePlanViewModel(
     private val repository: PlanRepository,
 ) : ViewModel() {
 
+    val planNameText = MutableLiveData<String>()
+    val planLocationText = MutableLiveData<String>()
+    val planDateText = MutableLiveData<String>()
+
     fun getPlanList() : LiveData<List<Plan>> {
         return repository.getPlanList()
     }
@@ -19,5 +23,9 @@ class HomePlanViewModel(
         return MutableLiveData(
             listOf()
         )
+    }
+
+    fun getPlanById(id: String): Plan? {
+        return repository.getPlanById(id)
     }
 }

@@ -4,6 +4,7 @@ import academy.bangkit.wander.presentation.main.MainScreen
 import academy.bangkit.wander.presentation.myplan.create.CreatePlanScreen
 import academy.bangkit.wander.presentation.myplan.create.hotels.HotelListScreen
 import academy.bangkit.wander.presentation.myplan.home.MyPlanScreen
+import academy.bangkit.wander.presentation.myplan.home.PlanDetailScreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,9 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 class AppRoute {
     companion object {
@@ -28,6 +31,7 @@ class AppRoute {
 
         const val CREATE_PLAN = "my_plan/create"
         const val HOTEL_LIST = "my_plan/create/hotel_list"
+        const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
     }
 }
 
@@ -38,7 +42,6 @@ fun AppNavGraph(navController: NavHostController, mainNavController: NavHostCont
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
         composable(AppRoute.FAVORITE) { DefaultScreen("Favorite") }
         composable(AppRoute.ACCOUNT) { DefaultScreen("Account") }
-        composable(AppRoute.CREATE_PLAN) {CreatePlanScreen(mainNavController)}
     }
 }
 
@@ -46,8 +49,18 @@ fun AppNavGraph(navController: NavHostController, mainNavController: NavHostCont
 fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main") {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
-        composable(AppRoute.CREATE_PLAN) {CreatePlanScreen(navController)}
-        composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController)}
+        composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
+        composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }
+        composable(
+            route = AppRoute.PLAN_DETAIL,
+            arguments = listOf(
+                navArgument("id") { type = NavType.StringType }
+        )) { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id")
+                id?.let {
+                    PlanDetailScreen(navController, id)
+                }
+            }
     }
 }
 

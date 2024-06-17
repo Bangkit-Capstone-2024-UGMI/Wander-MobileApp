@@ -47,7 +47,12 @@ fun PlanList (itemsData: List<Plan>, navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(bottom = 8.dp)
                 ) {
-                    PlanCard(data = itemsData[index])
+                    PlanCard(
+                        data = itemsData[index],
+                        onClick = {
+                            navController.navigate(
+                                route = AppRoute.PLAN_DETAIL.replace("{id}", itemsData[index].id))
+                        })
                 }
             }
         }
