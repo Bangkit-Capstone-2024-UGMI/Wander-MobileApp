@@ -1,6 +1,7 @@
-package academy.bangkit.wander.presentation.search
+package academy.bangkit.wander.presentation.search.widgets
 
 import academy.bangkit.wander.R
+import academy.bangkit.wander.data.model.Places
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,35 +24,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 val items = listOf(
-    Card(
-        cardImage = "s",
-        cardTitle = "Cafe Kurniawan",
-        cardLocation = "Cianjur"
+    Places(
+        placeImage = "s",
+        placeTitle = "Cafe Kurniawan",
+        placeLocation = "Cianjur"
     ),
 
-    Card(
-        cardImage = "s",
-        cardTitle = "Cafe Kurniawan",
-        cardLocation = "Cianjur"
+    Places(
+        placeImage = "s",
+        placeTitle = "Cafe Kurniawan",
+        placeLocation = "Cianjur"
     ),
 
-    Card(
-        cardImage = "s",
-        cardTitle = "Cafe Kurniawan",
-        cardLocation = "Cianjur"
+    Places(
+        placeImage = "s",
+        placeTitle = "Cafe Kurniawan",
+        placeLocation = "Cianjur"
     ),
 
-    Card(
-        cardImage = "s",
-        cardTitle = "Cafe Kurniawan",
-        cardLocation = "Cianjur"
+    Places(
+        placeImage = "s",
+        placeTitle = "Cafe Kurniawan",
+        placeLocation = "Cianjur"
     ),
 
-    Card(
-        cardImage = "s",
-        cardTitle = "Cafe Kurniawan",
-        cardLocation = "Cianjur"
+    Places(
+        placeImage = "s",
+        placeTitle = "Cafe Kurniawan",
+        placeLocation = "Cianjur"
     )
 )
 
@@ -59,7 +61,7 @@ val items = listOf(
 @Composable
 fun CardSection(){
     LazyRow(){
-        items(items.size){index ->
+        items(items.size){ index ->
             CardItem(index)
         }
     }
@@ -77,11 +79,11 @@ fun CardItem(
         lastItemPaddingEnd = 16.dp
     }
 
-    var image = painterResource(id = R.drawable.example_place)
+    var image = painterResource(id = R.drawable.example_location)
 
     Box(
         modifier =
-            Modifier.padding(start = 8.dp, end = lastItemPaddingEnd)
+        Modifier.padding(start = 8.dp, end = lastItemPaddingEnd)
     ){
         Column(modifier = Modifier
             .clip(RoundedCornerShape(12.dp))
@@ -93,7 +95,7 @@ fun CardItem(
         ){
             Image(
                 painter = image,
-                contentDescription = card.cardImage,
+                contentDescription = card.placeImage,
                 Modifier.clip(RoundedCornerShape(10.dp))
                     .height(114.dp)
                     .width(144.dp)
@@ -101,9 +103,9 @@ fun CardItem(
             )
 
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             Text(
-                text = card.cardTitle,
+                text = card.placeTitle,
                 color = Color.Black,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
@@ -112,7 +114,7 @@ fun CardItem(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = card.cardLocation,
+                text = card.placeLocation,
                 color = Color.Black,
                 fontSize = 10.sp,
                 fontWeight = FontWeight.SemiBold

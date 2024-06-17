@@ -1,6 +1,5 @@
 package academy.bangkit.wander.di
 
-import android.content.Context
 //import com.dicoding.storyapp.core.network.ApiConfig
 //import com.dicoding.storyapp.core.utils.dataStore
 //import com.dicoding.storyapp.data.local.DataPreferences
@@ -11,21 +10,17 @@ import android.content.Context
 
 object Injection {
 
-//    fun provideUserRepository(context: Context): UserRepository {
-//        val pref = DataPreferences.getInstance(context.dataStore)
-//        val userService = ApiConfig.getApiService(UserService::class.java)
-//        return UserRepository.getInstance(
-//            dataPreference = pref,
-//            userService = userService,
-//        )
-//    }
-//
-//    fun provideStoryRepository(context: Context): StoryRepository {
-//        val pref = DataPreferences.getInstance(context.dataStore)
-//        val storyService = ApiConfig.getApiService(StoryService::class.java)
-//        return StoryRepository.getInstance(
-//            dataPreference = pref,
-//            storyService = storyService
-//        )
-//    }
+    /*fun provideAuthRepository(context: Context): AuthRepository {
+        val authService = FirebaseAuth.getInstance()
+        return AuthRepository.getInstance(
+            authService = authService
+        )
+    }
+
+    fun providePlanRepository(context: Context): PlanRepository {
+        val planService = FakePlanService()
+        return PlanRepository.getInstance(
+            planService = planService
+        )
+    }*/
 }

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -20,6 +22,16 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        // Read the API key from local.properties
+        val properties = Properties().apply {
+            load(project.rootProject.file("local.properties").inputStream())
+        }
+        val apiKey = properties.getProperty("MAPS_API_KEY", "")
+        buildConfigField("String", "MAPS_API_KEY", "\"$apiKey\"")
+
+        // Set the API key in manifestPlaceholders
+        manifestPlaceholders["MAPS_API_KEY"] = apiKey
     }
 
     buildTypes {
@@ -96,11 +108,10 @@ dependencies {
     implementation ("androidx.compose.material3:material3-window-size-class:1.0.0")
 
     // Maps SDK for Android
-    implementation ("com.google.maps.android:maps-compose:2.0.0")
+    implementation ("com.google.maps.android:maps-compose:4.4.1")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
 
     // For permission handling
     implementation ("com.google.accompanist:accompanist-permissions:0.27.0")
-
 }
