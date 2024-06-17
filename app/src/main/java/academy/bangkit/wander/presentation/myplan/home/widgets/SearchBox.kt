@@ -27,9 +27,9 @@ fun SearchBox() {
     Box(
         modifier = Modifier
             .shadow(
-                elevation = 8.dp,
-                spotColor = Color(0x1A08335D),
-                ambientColor = Color(0x1A08335D)
+                elevation = 6.dp,
+                spotColor = Color(0x592B2002),
+                ambientColor = Color(0x59463005)
             )
             .fillMaxWidth()
             .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(16.dp))
@@ -50,31 +50,27 @@ fun SearchBox() {
                     fontWeight = FontWeight(700),
                 )
             )
-            Box(
-
-            ) {
-                OutlinedTextField(
-                    shape = CircleShape,
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = Color(0xFF1D5D9B),
-                        unfocusedBorderColor = Color(0xFF1D5D9B),
-                        cursorColor = Color(0xFF1D5D9B),
-                        containerColor = Color(0x211D5D9B),
-                    ),
-                    value = "",
-                    onValueChange = {},
-                    placeholder = { Text(text = "Explore amazing destinations here", style = TextStyle(color=Color(0xCC1D5D9B))) },
-                    trailingIcon = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_search),
-                            contentDescription = "Search Icon",
-                            tint = Color(0xFF1D5D9B)
-                        )
-                    },
-                )
-            }
+            OutlinedTextField(
+                shape = CircleShape,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color(0xFF1D5D9B),
+                    unfocusedBorderColor = Color(0xFF1D5D9B),
+                    cursorColor = Color(0xFF1D5D9B),
+                    containerColor = Color(0x211D5D9B),
+                ),
+                value = "",
+                onValueChange = {},
+                placeholder = { Text(text = "Explore amazing destinations here", style = TextStyle(color=Color(0xCC1D5D9B))) },
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_search),
+                        contentDescription = "Search Icon",
+                        tint = Color(0xFF1D5D9B)
+                    )
+                },
+            )
         }
     }
 }

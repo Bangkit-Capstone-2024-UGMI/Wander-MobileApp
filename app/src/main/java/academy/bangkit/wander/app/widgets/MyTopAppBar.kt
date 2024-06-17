@@ -20,7 +20,7 @@ fun MyTopAppBar(
         },
         modifier = Modifier.fillMaxWidth(),
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
+            containerColor = MaterialTheme.colorScheme.background,
             titleContentColor = MaterialTheme.colorScheme.onPrimary
         ),
         navigationIcon = {

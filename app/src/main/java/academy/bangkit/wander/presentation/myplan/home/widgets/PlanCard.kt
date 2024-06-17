@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -34,15 +35,23 @@ import coil.compose.AsyncImage
 
 @Composable
 fun PlanCard(data: Plan, onClick: () -> Unit) {
-    Card(modifier = Modifier
+    Card(
+        modifier = Modifier
         .fillMaxWidth()
         .clickable(onClick = onClick)
         .shadow(
-            elevation = 4.dp,
-            spotColor = Color(0x1A08335D),
-            ambientColor = Color(0x1A08335D)
+            elevation = 6.dp,
+            spotColor = Color(0x592B2002),
+            ambientColor = Color(0x59463005)
         )
-        .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(size = 8.dp))) {
+        .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(size = 8.dp)),
+        colors = CardColors(
+            containerColor = Color.White,
+            contentColor = AppColor.PrimaryDark,
+            disabledContainerColor = Color(0xFFE0E0E0),
+            disabledContentColor = Color(0xFFB0B0B0),
+        )
+    ) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
