@@ -3,6 +3,8 @@ package academy.bangkit.wander.presentation.myplan.create.hotels.widgets
 import academy.bangkit.wander.app.theme.AppColor
 import academy.bangkit.wander.data.model.Hotel
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,9 +33,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
 @Composable
-fun HotelCard(data: Hotel) {
-    Box(modifier = Modifier
+fun HotelCard(data: Hotel, onClick: () -> Unit){
+    Card(modifier = Modifier
         .fillMaxWidth()
+        .clickable(onClick = onClick)
         .shadow(
             elevation = 4.dp,
             spotColor = Color(0x1A08335D),
@@ -40,7 +47,8 @@ fun HotelCard(data: Hotel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Box(
                 modifier = Modifier
@@ -54,6 +62,7 @@ fun HotelCard(data: Hotel) {
                     modifier = Modifier.fillMaxSize()
                 )
             }
+
             Column(
                 modifier = Modifier
                     .padding(start = 24.dp)
@@ -70,9 +79,38 @@ fun HotelCard(data: Hotel) {
                 )
                 Spacer(modifier = Modifier.size(6.dp))
 
+                Row {
+                    Text(
+                        text = "${data.distance} KM ",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            color = AppColor.PrimaryBlue,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    Text(
+                        text = "from the midpoint",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            color = AppColor.PrimaryBlue,
+                        )
+                    )
+                }
+            }
+
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(end = 8.dp)
+            ) {
+                Icon(imageVector = Icons.Filled.Star, contentDescription ="rating", tint = AppColor.PrimaryYellow )
+                Spacer(modifier = Modifier.padding(2.dp))
                 Text(
-                    text = data.price,
-                    style = TextStyle(fontSize = 16.sp, color = AppColor.PrimaryBlue, fontWeight = FontWeight.Bold)
+                    text = "5.0",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        color = AppColor.PrimaryBlue,
+                        fontWeight = FontWeight.Bold
+                    )
                 )
             }
         }
