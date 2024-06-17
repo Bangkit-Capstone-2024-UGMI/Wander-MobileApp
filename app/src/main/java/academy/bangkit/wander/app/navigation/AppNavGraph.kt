@@ -2,6 +2,8 @@ package academy.bangkit.wander.app.navigation
 
 import academy.bangkit.wander.presentation.main.MainScreen
 import academy.bangkit.wander.presentation.myplan.create.CreatePlanScreen
+import academy.bangkit.wander.presentation.myplan.create.SuccessScreen
+import academy.bangkit.wander.presentation.myplan.create.hotels.HotelDetailScreen
 import academy.bangkit.wander.presentation.myplan.create.hotels.HotelListScreen
 import academy.bangkit.wander.presentation.myplan.home.MyPlanScreen
 import academy.bangkit.wander.presentation.myplan.home.PlanDetailScreen
@@ -32,6 +34,8 @@ class AppRoute {
         const val CREATE_PLAN = "my_plan/create"
         const val HOTEL_LIST = "my_plan/create/hotel_list"
         const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
+        const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
+        const val SUCCESS_CREATE = "my_plan/success_create"
     }
 }
 
@@ -47,7 +51,7 @@ fun AppNavGraph(navController: NavHostController, mainNavController: NavHostCont
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "main") {
+    NavHost(navController = navController, startDestination = AppRoute.HOTEL_LIST) {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
         composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }
@@ -61,6 +65,8 @@ fun AppNavigation(navController: NavHostController) {
                     PlanDetailScreen(navController, id)
                 }
             }
+        composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
+        composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
     }
 }
 
