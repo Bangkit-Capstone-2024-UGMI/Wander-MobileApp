@@ -51,7 +51,7 @@ fun AppNavGraph(navController: NavHostController, mainNavController: NavHostCont
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = AppRoute.HOTEL_LIST) {
+    NavHost(navController = navController, startDestination = AppRoute.MAIN ) {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
         composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }

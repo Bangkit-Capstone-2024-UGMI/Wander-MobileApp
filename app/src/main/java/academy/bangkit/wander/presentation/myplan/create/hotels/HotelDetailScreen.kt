@@ -47,7 +47,11 @@ fun HotelDetailScreen(
             ) {
                 MyButton(
                     text = "Select Hotel",
-                    onClick = {navController.navigate(AppRoute.HOTEL_LIST)}
+                    onClick = {navController.navigate(AppRoute.SUCCESS_CREATE) {
+                        popUpTo(AppRoute.MAIN) {
+                            inclusive = false
+                        }
+                    } }
                 )
             }
         }
