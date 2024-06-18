@@ -1,9 +1,9 @@
-package academy.bangkit.wander.presentation.profile
+package com.bangkit.wander.presentation.profile
 
 
-import academy.bangkit.wander.app.widgets.MyTopAppBar
-import academy.bangkit.wander.presentation.profile.widgets.ProfileCard
-import academy.bangkit.wander.presentation.profile.widgets.SettingCard
+import com.bangkit.wander.app.widgets.MyTopAppBar
+import com.bangkit.wander.presentation.profile.widgets.ProfileCard
+import com.bangkit.wander.presentation.profile.widgets.SettingCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

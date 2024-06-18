@@ -1,6 +1,6 @@
-package academy.bangkit.wander.presentation.profile.widgets
+package com.bangkit.wander.presentation.profile.widgets
 
-import academy.bangkit.wander.R
+import com.bangkit.wander.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

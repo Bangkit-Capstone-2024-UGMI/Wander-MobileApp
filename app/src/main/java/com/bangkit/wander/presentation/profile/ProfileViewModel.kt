@@ -1,6 +1,6 @@
-package academy.bangkit.wander.presentation.profile
+package com.bangkit.wander.presentation.profile
 
-import academy.bangkit.wander.data.repository.AuthRepository
+import com.bangkit.wander.data.repository.AuthRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

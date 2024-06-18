@@ -1,6 +1,6 @@
 package com.bangkit.wander.presentation.main
 
-import com.bangkit.wander.app.navigation.AppNavGraph
+import com.bangkit.wander.app.navigation.AppNavBottomBar
 import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.widgets.BottomNavigationItem
 import androidx.compose.foundation.layout.Box
@@ -108,7 +108,7 @@ fun MainScreen(navController: NavHostController, mainNavController: NavHostContr
             ) {
                     paddingValues ->
                 Box(modifier = Modifier.padding(paddingValues)) {
-                    AppNavGraph(navController = navController, mainNavController = mainNavController)
+                    AppNavBottomBar(navController = navController, mainNavController = mainNavController)
                 }
             }
         }

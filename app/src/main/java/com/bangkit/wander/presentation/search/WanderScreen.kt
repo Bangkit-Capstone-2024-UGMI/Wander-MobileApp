@@ -1,7 +1,7 @@
-package academy.bangkit.wander.presentation.search
+package com.bangkit.wander.presentation.search
 
-import academy.bangkit.wander.presentation.search.widgets.BottomWidgetContent
-import academy.bangkit.wander.presentation.search.widgets.MapScreen
+import com.bangkit.wander.presentation.search.widgets.BottomWidgetContent
+import com.bangkit.wander.presentation.search.widgets.MapScreen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

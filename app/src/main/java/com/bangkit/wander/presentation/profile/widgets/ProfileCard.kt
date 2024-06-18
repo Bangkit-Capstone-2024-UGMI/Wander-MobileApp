@@ -1,7 +1,7 @@
-package academy.bangkit.wander.presentation.profile.widgets
+package com.bangkit.wander.presentation.profile.widgets
 
-import academy.bangkit.wander.R
-import academy.bangkit.wander.presentation.profile.ProfileViewModel
+import com.bangkit.wander.R
+import com.bangkit.wander.presentation.profile.ProfileViewModel
 import android.graphics.Color.parseColor
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -7,7 +7,7 @@ import com.bangkit.wander.presentation.main.MainViewModel
 import com.bangkit.wander.presentation.login.LoginViewModel
 import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
 import com.bangkit.wander.presentation.myplan.home.HomePlanViewModel
-import academy.bangkit.wander.presentation.profile.ProfileViewModel
+import com.bangkit.wander.presentation.profile.ProfileViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

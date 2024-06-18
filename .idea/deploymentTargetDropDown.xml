@@ -2,23 +2,21 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MapScreen">
-        <State />
-      </entry>
-      <entry key="PlaceDetailScreenPreview">
-        <State />
-      </entry>
-      <entry key="WanderScreen">
-        <State />
-      </entry>
-      <entry key="DefaultPreview">
-        <State />
-      </entry>
-      <entry key="ProfileEmailScreenPreview">
-        <State />
-      </entry>
       <entry key="app">
-        <State />
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="RR8RC0AAS6J" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-06-18T05:53:01.242093600Z" />
+        </State>
       </entry>
     </value>
   </component>

@@ -1,4 +1,4 @@
-package academy.bangkit.wander.presentation.saved.widgets
+package com.bangkit.wander.presentation.saved.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -22,6 +22,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.bangkit.wander.presentation.profile.ProfileScreen
+import com.bangkit.wander.presentation.saved.SavedScreen
+import com.bangkit.wander.presentation.search.WanderScreen
 
 class AppRoute {
     companion object {
@@ -40,12 +43,12 @@ class AppRoute {
 }
 
 @Composable
-fun AppNavGraph(navController: NavHostController, mainNavController: NavHostController) {
+fun AppNavBottomBar(navController: NavHostController, mainNavController: NavHostController) {
     NavHost(navController = navController, startDestination = "wander") {
-        composable(AppRoute.WANDER) { DefaultScreen("Wander") }
+        composable(AppRoute.WANDER) { WanderScreen() }
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
-        composable(AppRoute.FAVORITE) { DefaultScreen("Favorite") }
-        composable(AppRoute.ACCOUNT) { DefaultScreen("Account") }
+        composable(AppRoute.FAVORITE) { SavedScreen() }
+        composable(AppRoute.ACCOUNT) { ProfileScreen(navController) }
     }
 }
 

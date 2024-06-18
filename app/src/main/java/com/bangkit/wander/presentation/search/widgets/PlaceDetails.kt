@@ -1,4 +1,4 @@
-package academy.bangkit.wander.presentation.search.widgets
+package com.bangkit.wander.presentation.search.widgets
 
 data class PlaceDetails(
     val id: Int,

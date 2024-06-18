@@ -1,7 +1,7 @@
-package academy.bangkit.wander.presentation.search.widgets
+package com.bangkit.wander.presentation.search.widgets
 
-import academy.bangkit.wander.R
-import academy.bangkit.wander.data.model.Places
+import com.bangkit.wander.R
+import com.bangkit.wander.data.model.Places
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

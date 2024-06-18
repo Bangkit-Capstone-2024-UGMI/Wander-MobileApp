@@ -1,8 +1,7 @@
-package academy.bangkit.wander.presentation.profile
+package com.bangkit.wander.presentation.profile
 
 
-import academy.bangkit.wander.app.widgets.MyTopAppBar
-import androidx.activity.compose.BackHandler
+import com.bangkit.wander.app.widgets.MyTopAppBar
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,14 +20,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun ProfileNameScreen(navController: NavHostController) {
+fun ProfileEmailScreen(navController: NavHostController) {
     val profileViewModel: ProfileViewModel = viewModel()
     val currentUser by profileViewModel.currentUser.observeAsState()
-    val userName = currentUser?.displayName
-
-    BackHandler {
-        navController.popBackStack()
-    }
+    val userEmail = currentUser?.email
 
     Scaffold(
         topBar = {
@@ -47,9 +41,8 @@ fun ProfileNameScreen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = userName ?: "Name not available",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
+                text = userEmail ?: "Email not available",
+                fontSize = 16.sp,
                 modifier = Modifier.padding(16.dp)
             )
         }
@@ -58,7 +51,7 @@ fun ProfileNameScreen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProfileNameScreenPreview() {
+fun ProfileEmailScreenPreview() {
     val navController = rememberNavController()
-    ProfileNameScreen(navController = navController)
+    ProfileEmailScreen(navController = navController)
 }

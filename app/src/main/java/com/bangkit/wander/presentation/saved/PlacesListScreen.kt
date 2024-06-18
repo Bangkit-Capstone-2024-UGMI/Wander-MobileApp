@@ -1,8 +1,8 @@
-package academy.bangkit.wander.presentation.saved
+package com.bangkit.wander.presentation.saved
 
-import academy.bangkit.wander.R
-import academy.bangkit.wander.presentation.saved.widgets.Place
-import academy.bangkit.wander.presentation.saved.widgets.PlaceCard
+import com.bangkit.wander.R
+import com.bangkit.wander.presentation.saved.widgets.Place
+import com.bangkit.wander.presentation.saved.widgets.PlaceCard
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

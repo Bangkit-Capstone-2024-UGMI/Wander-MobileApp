@@ -1,7 +1,7 @@
-package academy.bangkit.wander.presentation.saved
+package com.bangkit.wander.presentation.saved
 
-import academy.bangkit.wander.R
-import academy.bangkit.wander.presentation.saved.widgets.Place
+import com.bangkit.wander.R
+import com.bangkit.wander.presentation.saved.widgets.Place
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
