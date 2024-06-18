@@ -1,5 +1,8 @@
 import java.util.Properties
 
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -8,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "academy.bangkit.wander"
+    namespace = "com.bangkit.wander"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "academy.bangkit.wander"
+        applicationId = "com.bangkit.wander"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -23,12 +26,11 @@ android {
             useSupportLibrary = true
         }
 
-        // Read the API key from local.properties
-        val properties = Properties().apply {
-            load(project.rootProject.file("local.properties").inputStream())
-        }
         val apiKey = properties.getProperty("MAPS_API_KEY", "")
         buildConfigField("String", "MAPS_API_KEY", "\"$apiKey\"")
+        buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField("String", "ML_URL", "\"${properties.getProperty("ML_URL")}\"")
+        buildConfigField("String", "MAP_KEY", "\"${properties.getProperty("MAP_KEY")}\"")
 
         // Set the API key in manifestPlaceholders
         manifestPlaceholders["MAPS_API_KEY"] = apiKey
@@ -102,10 +104,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.activity:activity-compose:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
     implementation("androidx.compose.runtime:runtime-livedata")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation ("androidx.compose.material3:material3-window-size-class:1.0.0")
+
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("com.google.code.gson:gson:2.11.0")
 
     // Maps SDK for Android
     implementation ("com.google.maps.android:maps-compose:4.4.1")
