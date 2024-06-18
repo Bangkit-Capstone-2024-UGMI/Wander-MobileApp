@@ -21,14 +21,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PlaceCard(place: Place) {
+fun PlaceCard(place: PlaceData, onClick: () -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = Modifier
             .padding(8.dp)
             .width(160.dp)
             .height(190.dp)
-            .clickable { /* Handle click if needed */ }
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFF4D160)
+        )
     ) {
         Column(
             modifier = Modifier.padding(8.dp)

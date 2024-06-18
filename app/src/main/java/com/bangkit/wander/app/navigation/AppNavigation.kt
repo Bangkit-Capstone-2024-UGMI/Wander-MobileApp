@@ -23,6 +23,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.wander.presentation.profile.ProfileScreen
+import com.bangkit.wander.presentation.saved.PlaceDetailScreen
+import com.bangkit.wander.presentation.saved.PlacesListScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
 import com.bangkit.wander.presentation.search.WanderScreen
 
@@ -39,6 +41,9 @@ class AppRoute {
         const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
+
+        const val PLACE_LIST = "saved/place_list"
+        const val PLACE_DETAIL = "saved/place_detail"
     }
 }
 
@@ -70,8 +75,12 @@ fun AppNavigation(navController: NavHostController) {
             }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
+        composable(AppRoute.PLACE_LIST){ PlacesListScreen(navController)}
+        composable(AppRoute.PLACE_DETAIL){ PlaceDetailScreen(navController) }
+
     }
 }
+
 
 @Composable
 fun DefaultScreen(
