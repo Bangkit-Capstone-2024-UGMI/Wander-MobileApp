@@ -1,13 +1,21 @@
 package com.bangkit.wander.data.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
-@Parcelize
-data class Plan(
+@Serializable
+data class Plan (
     val id: String,
-    val name: String,
-    val location: String,
-    val image: String,
-    val date: String
-) : Parcelable
+
+    @SerialName("userId")
+    val userID: Long,
+
+    val title: String,
+    val date: String,
+    val city: String,
+    val destinations: List<Destination>,
+    val hotel: Hotel
+)
+
