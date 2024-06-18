@@ -7,6 +7,7 @@ import academy.bangkit.wander.presentation.main.MainViewModel
 import academy.bangkit.wander.presentation.login.LoginViewModel
 import academy.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
 import academy.bangkit.wander.presentation.myplan.home.HomePlanViewModel
+import academy.bangkit.wander.presentation.profile.ProfileViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(CreatePlanViewModel::class.java) -> {
                 CreatePlanViewModel() as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java)->{
+                ProfileViewModel(authRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
