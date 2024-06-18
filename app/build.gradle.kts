@@ -1,9 +1,13 @@
+import java.util.Properties
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
-    id("earth.levi.dotenv-android")
 }
 
 android {
@@ -19,9 +23,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"${System.getenv("BASE_URL")}\"")
-        buildConfigField("String", "ML_URL", "\"${System.getenv("ML_URL")}\"")
-        buildConfigField("String", "MAP_KEY", "\"${System.getenv("MAP_KEY")}\"")
+        buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField("String", "ML_URL", "\"${properties.getProperty("ML_URL")}\"")
+        buildConfigField("String", "MAP_KEY", "\"${properties.getProperty("MAP_KEY")}\"")
     }
 
     buildTypes {
@@ -86,11 +90,4 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.google.code.gson:gson:2.11.0")
-}
-
-dotenv {
-    // the package name that is added to the top of your source code file: `import X.Y.Z`
-    packageName = "academy.bangkit.wander"
-    // the path to the source code in your Android app module. This is probably `src/main/java` but could be something else like `src/main/kotlin`
-    sourcePath = "src/main/java/"
 }
