@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "academy.bangkit.wander"
+    namespace = "com.bangkit.wander"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "academy.bangkit.wander"
+        applicationId = "com.bangkit.wander"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
