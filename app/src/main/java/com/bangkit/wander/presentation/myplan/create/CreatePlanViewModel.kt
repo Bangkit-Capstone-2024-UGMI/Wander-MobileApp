@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CreatePlanViewModel() : ViewModel() {
+class CreatePlanViewModel : ViewModel() {
 
     private val _planNameText = MutableLiveData("")
     val planNameText: LiveData<String> = _planNameText
@@ -15,7 +15,7 @@ class CreatePlanViewModel() : ViewModel() {
     private val _locationText = MutableLiveData("")
     val locationText: LiveData<String> = _locationText
 
-    private val _destinationList = MutableLiveData<List<String>>(listOf(""))
+    private val _destinationList = MutableLiveData(listOf(""))
     val destinationList: LiveData<List<String>> = _destinationList
 
     fun onPlanNameTextChanged(newText: String) {
@@ -30,30 +30,21 @@ class CreatePlanViewModel() : ViewModel() {
         _locationText.value = newText
     }
 
-    fun onDestinationListChanged(newList: List<String>) {
-        _destinationList.value = newList
-    }
-
     fun addDestination(newDestination: String) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
         currentList.add(newDestination)
         _destinationList.value = currentList
     }
 
-    fun removeDestination(destination: String) {
+    fun onDestinationTextCahnge(index: Int, newText:String) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
-        currentList.remove(destination)
+        currentList[index] = newText
         _destinationList.value = currentList
     }
 
-    fun clearDestinationList() {
-        _destinationList.value = listOf()
-    }
-
-    fun clearAllFields() {
-        _planNameText.value = ""
-        _dateText.value = ""
-        _locationText.value = ""
-        _destinationList.value = listOf()
+    fun removeDestination(index: Int) {
+        val currentList = _destinationList.value.orEmpty().toMutableList()
+        currentList.removeAt(index)
+        _destinationList.value = currentList
     }
 }

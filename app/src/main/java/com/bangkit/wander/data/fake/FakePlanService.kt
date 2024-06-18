@@ -3,6 +3,7 @@ package com.bangkit.wander.data.fake
 import com.bangkit.wander.data.model.Plan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bangkit.wander.data.model.Hotel
 
 class FakePlanService {
 
@@ -12,38 +13,39 @@ class FakePlanService {
         planList.value = listOf(
             Plan(
                 "1",
-                "Bali 1",
+                123,
+                "Holiday Bro",
+                "2021-10-10",
                 "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
+                listOf(),
+                Hotel(
+                    "Hotel 1",
+                    "Bali, Indonesia",
+                    4.5,
+                    4,
+                    123.123,
+                    1.9,
+                    1.9,
+                    "123"
+                )
             ),
             Plan(
-                "2",
-                "Bali 2",
+                "1",
+                123,
+                "Holiday Bro",
+                "2021-10-10",
                 "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "3",
-                "Bali 3",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "4",
-                "Bali 4",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
-            ),
-            Plan(
-                "5",
-                "Bali 5",
-                "Bali, Indonesia",
-                "https://awsimages.detik.net.id/community/media/visual/2023/07/19/ilustrasi-pulau-bali_169.jpeg?w=600&q=90",
-                "2021-10-10"
+                listOf(),
+                Hotel(
+                    "Hotel 1",
+                    "Bali, Indonesia",
+                    4.5,
+                    4,
+                    123.123,
+                    1.9,
+                    1.9,
+                    "123"
+                )
             ),
         )
     }

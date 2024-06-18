@@ -49,10 +49,14 @@ fun HotelListScreen(
                     ) {
                         HotelCard(
                             data = Hotel(
-                                name = "Hotel 1",
-                                location = "Location 1",
-                                image = "https://asset-a.grid.id/crop/0x0:0x0/945x630/photo/2023/06/18/staycationjpg-20230618013836.jpg",
-                                distance = 4.3
+                                "Hotel 1",
+                                "Bali, Indonesia",
+                                4.5,
+                                4,
+                                123.123,
+                                1.9,
+                                1.9,
+                                "123"
                             ),
                             onClick = { navController.navigate(AppRoute.HOTEL_DETAIL)}
                         )
@@ -64,10 +68,14 @@ fun HotelListScreen(
                     ) {
                         HotelCard(
                             data = Hotel(
-                                name = "Hotel 2",
-                                location = "Location 2",
-                                image = "https://asset-a.grid.id/crop/0x0:0x0/945x630/photo/2023/06/18/staycationjpg-20230618013836.jpg",
-                                distance = 3.0
+                                "Hotel 1",
+                                "Bali, Indonesia",
+                                4.5,
+                                4,
+                                123.123,
+                                1.9,
+                                1.9,
+                                "123"
                             ),
                             onClick = { navController.navigate(AppRoute.HOTEL_DETAIL)}
                         )

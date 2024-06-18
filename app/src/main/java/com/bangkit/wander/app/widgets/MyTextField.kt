@@ -6,6 +6,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +26,9 @@ fun MyTextField(
     value : String,
     onValueChange : (String) -> Unit = {},
     icon: @Composable (() -> Unit)? = null,
-    readOnly: Boolean = false
+    readOnly: Boolean = false,
+    isPlanField: Boolean = false,
+    onCloseField: () -> Unit = {}
 ) {
     Column (
         modifier = Modifier.fillMaxWidth()
@@ -53,8 +59,18 @@ fun MyTextField(
                     style = TextStyle(color = AppColor.PrimaryDarkVariant)
                 )
             },
-            leadingIcon = icon
-            ,
+            leadingIcon = icon,
+            trailingIcon = {
+                if (isPlanField) {
+                    IconButton(onClick = onCloseField) {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = "Close",
+                            tint = AppColor.Error
+                        )
+                    }
+                }
+            }
         )
     }
 }

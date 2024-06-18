@@ -101,13 +101,15 @@ fun CreatePlanScreen(navController: NavHostController) {
                             )
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        destinationList.forEach { it ->
+                        for (i in destinationList.indices) {
                             MyTextField(
                                 label = null,
                                 placeholder = "Find a destination",
-                                value = it,
-                                onValueChange = { viewModel.addDestination(it) },
-                                icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )}
+                                value = destinationList[i],
+                                onValueChange = { viewModel.onDestinationTextCahnge(i, it) },
+                                icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )},
+                                isPlanField = i!=0,
+                                onCloseField = { viewModel.removeDestination(i) }
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                         }

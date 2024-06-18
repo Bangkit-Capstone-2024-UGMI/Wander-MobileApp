@@ -38,9 +38,9 @@ fun PlanDetailScreen(
         factory = ViewModelFactory.getInstance(context)
     )
     val plan = viewModel.getPlanById(id)
-    val planNameText by viewModel.planNameText.observeAsState(initial = plan?.name)
+    val planNameText by viewModel.planNameText.observeAsState(initial = plan?.title)
     val dateText by viewModel.planDateText.observeAsState(initial = plan?.date)
-    val locationText by viewModel.planLocationText.observeAsState(initial = plan?.location)
+    val locationText by viewModel.planLocationText.observeAsState(initial = plan?.city)
 
     Scaffold(
         topBar = {

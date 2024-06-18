@@ -64,7 +64,7 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
                     .clip(RoundedCornerShape(4.dp))
             ) {
                 AsyncImage(
-                    model = data.image,
+                    model = "https://www.gstatic.com/webp/gallery/1.jpg",
                     contentDescription = "Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -82,7 +82,7 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
                 )
                 Spacer(modifier = Modifier.size(6.dp))
                 Text(
-                    text = data.location,
+                    text = data.formattedAddress,
                     style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                 )
                 Spacer(modifier = Modifier.size(6.dp))

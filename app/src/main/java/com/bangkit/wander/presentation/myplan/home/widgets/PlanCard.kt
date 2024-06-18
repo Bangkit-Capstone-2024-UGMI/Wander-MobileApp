@@ -64,7 +64,7 @@ fun PlanCard(data: Plan, onClick: () -> Unit) {
                     .clip(RoundedCornerShape(4.dp))
             ) {
                 AsyncImage(
-                    model = data.image,
+                    model = "https://images.unsplash.com/photo-1612830725323-3b1b0b2b1b3d",
                     contentDescription = "Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -76,12 +76,12 @@ fun PlanCard(data: Plan, onClick: () -> Unit) {
                     .weight(1f),
             ) {
                  Text(
-                     text = data.name,
+                     text = data.title,
                      style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = AppColor.PrimaryDark)
                  )
                  Spacer(modifier = Modifier.size(6.dp))
                  Text(
-                     text = data.location,
+                     text = data.city,
                      style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                  )
                 Spacer(modifier = Modifier.size(6.dp))
