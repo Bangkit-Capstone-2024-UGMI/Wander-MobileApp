@@ -24,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bangkit.wander.presentation.profile.ProfileScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
+import com.bangkit.wander.presentation.search.LocationDetailScreen
 import com.bangkit.wander.presentation.search.WanderScreen
 
 class AppRoute {
@@ -39,6 +40,8 @@ class AppRoute {
         const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
+
+        //const val LOCATION_DETAIL = "wander/location_detail"
     }
 }
 
@@ -70,6 +73,7 @@ fun AppNavigation(navController: NavHostController) {
             }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
+        //composable(AppRoute.LOCATION_DETAIL) { LocationDetailScreen(navController) }
     }
 }
 

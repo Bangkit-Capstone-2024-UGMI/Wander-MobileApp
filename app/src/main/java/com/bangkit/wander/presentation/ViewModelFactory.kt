@@ -11,6 +11,7 @@ import com.bangkit.wander.presentation.profile.ProfileViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.bangkit.wander.presentation.search.maps.MapViewModel
 
 
 class ViewModelFactory(
@@ -36,6 +37,10 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ProfileViewModel::class.java)->{
                 ProfileViewModel(authRepository) as T
             }
+            modelClass.isAssignableFrom(MapViewModel::class.java)->{
+                MapViewModel() as T
+            }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

@@ -1,7 +1,7 @@
 package com.bangkit.wander.presentation.search
 
 import com.bangkit.wander.presentation.search.widgets.BottomWidgetContent
-import com.bangkit.wander.presentation.search.widgets.MapScreen
+import com.bangkit.wander.presentation.search.maps.MapScreen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,9 +11,17 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.bangkit.wander.presentation.ViewModelFactory
+import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
+import com.bangkit.wander.presentation.search.maps.MapState
+import com.bangkit.wander.presentation.search.maps.MapViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -21,6 +29,10 @@ import kotlinx.coroutines.launch
 @Preview
 @Composable
 fun WanderScreen() {
+    val context = LocalContext.current
+    val viewModel: MapViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
     val scaffoldState = rememberBottomSheetScaffoldState(
@@ -48,7 +60,7 @@ fun WanderScreen() {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
             ) {
-                MapScreen(modifier = Modifier.fillMaxSize())
+                MapScreen(state = viewModel.state.value)
                 SearchBar(
                     modifier = Modifier.fillMaxWidth(),
                     query = text,

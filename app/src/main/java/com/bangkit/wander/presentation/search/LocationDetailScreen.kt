@@ -1,7 +1,7 @@
 package com.bangkit.wander.presentation.search
 
+import androidx.compose.foundation.BorderStroke
 import com.bangkit.wander.R
-import com.bangkit.wander.presentation.search.widgets.PlaceDetails
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,11 +16,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -28,38 +29,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.bangkit.wander.app.theme.AppColor
 
 
-@Preview(showBackground = true)
 @Composable
-fun PlaceDetailScreenPreview() {
-    val place = PlaceDetails(
-        id = 1,
-        name = "Sample Place",
-        location = "Sample Location",
-        imageResource = R.drawable.example_location,
-        description = "This is a sample description of the place.",
-        moreImages = listOf(
-            R.drawable.example_location,
-            R.drawable.example_location,
-            R.drawable.example_location,
-            R.drawable.example_location
-        )
-    )
-
-
-    LocationDetailScreen(place = place, navigateBack = { /* No action in preview */ })
-
-}
-@Composable
-fun LocationDetailScreen(place: PlaceDetails, navigateBack: () -> Unit) {
+fun LocationDetailScreen(navController : NavHostController) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -71,15 +55,15 @@ fun LocationDetailScreen(place: PlaceDetails, navigateBack: () -> Unit) {
                     .height(250.dp)
             ) {
                 Image(
-                    painter = painterResource(id = place.imageResource),
-                    contentDescription = place.name,
+                    painter = painterResource(id = R.drawable.location),
+                    contentDescription = "Hotel Image",
                     modifier = Modifier
                         .fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
 
                 IconButton(
-                    onClick = { navigateBack() },
+                    onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(16.dp)
                         .size(48.dp)
@@ -98,11 +82,25 @@ fun LocationDetailScreen(place: PlaceDetails, navigateBack: () -> Unit) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = place.name, fontSize = 32.sp)
+                Text(text = "Hotel Kurniawan", fontSize = 32.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = place.location, fontSize = 22.sp)
+                Text(text = "Cianjur", fontSize = 22.sp)
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = place.description, fontSize = 16.sp)
+                Row (
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Icon(imageVector = Icons.Filled.Star, contentDescription ="rating", tint = AppColor.PrimaryYellow )
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Text(
+                        text = "5.0",
+                        style = TextStyle(
+                            fontSize = 18.sp,
+                            color = AppColor.PrimaryBlue,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Buttons for directions
@@ -115,53 +113,38 @@ fun LocationDetailScreen(place: PlaceDetails, navigateBack: () -> Unit) {
                         modifier = Modifier
                             .height(50.dp)
                             .width(140.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFF4D160)
+                        ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text(text = "Directions")
                     }
+
                     OutlinedButton(
                         onClick = { /* Handle start directions click */ },
                         modifier = Modifier
                             .width(90.dp)
                             .height(50.dp),
-                        shape = RoundedCornerShape(8.dp)
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFF4D160)),  // Custom outline color
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = Color(0xFFF4D160)  // Custom text color
+                        )
                     ) {
                         Text(text = "Start")
-                    }
-                    OutlinedButton(
-                        onClick = { /* Handle start directions click */ },
-                        modifier = Modifier
-                            .width(90.dp)
-                            .height(50.dp),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(text = "Save")
                     }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
-
-        // List of images
-        items(place.moreImages.chunked(2)) { rowImages ->
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            ) {
-                for (imageRes in rowImages) {
-                    Image(
-                        painter = painterResource(id = imageRes),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .width(182.dp)
-                            .height(126.dp)
-                            .clip(shape = RoundedCornerShape(8.dp))
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-        }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewPlaceDetailScreen() {
+    val navController = rememberNavController()
+    LocationDetailScreen(navController = navController)
 }
