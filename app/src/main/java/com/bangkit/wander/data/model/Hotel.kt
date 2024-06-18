@@ -1,24 +1,25 @@
 package com.bangkit.wander.data.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Serializable
+@Parcelize
 data class Hotel (
     val name: String,
 
-    @SerialName("formatted_address")
+    @field:SerializedName("formatted_address")
     val formattedAddress: String,
 
     val distance: Double,
-    val rating: Long,
+    val rating: Double,
 
-    @SerialName("predicted_ranking_score")
+    @field:SerializedName("predicted_ranking_score")
     val predictedRankingScore: Double,
 
     val lat: Double,
     val lng: Double,
 
-    @SerialName("place_id")
-    val placeID: String
-)
+    @field:SerializedName("place_id")
+    val placeId: String
+) : Parcelable

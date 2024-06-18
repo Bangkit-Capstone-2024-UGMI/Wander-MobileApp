@@ -31,7 +31,7 @@ class ViewModelFactory(
                 HomePlanViewModel(planRepository) as T
             }
             modelClass.isAssignableFrom(CreatePlanViewModel::class.java) -> {
-                CreatePlanViewModel() as T
+                CreatePlanViewModel(planRepository) as T
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java)->{
                 ProfileViewModel(authRepository) as T

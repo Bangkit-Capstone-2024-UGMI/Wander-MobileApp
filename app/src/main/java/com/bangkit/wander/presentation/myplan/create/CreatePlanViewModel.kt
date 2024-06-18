@@ -3,8 +3,15 @@ package com.bangkit.wander.presentation.myplan.create
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bangkit.wander.data.model.Hotel
+import com.bangkit.wander.data.repository.PlanRepository
+import com.bangkit.wander.data.request.HotelsRequest
+import kotlinx.coroutines.launch
 
-class CreatePlanViewModel : ViewModel() {
+class CreatePlanViewModel (
+    private val planRepository: PlanRepository
+) : ViewModel() {
 
     private val _planNameText = MutableLiveData("")
     val planNameText: LiveData<String> = _planNameText
@@ -17,6 +24,23 @@ class CreatePlanViewModel : ViewModel() {
 
     private val _destinationList = MutableLiveData(listOf(""))
     val destinationList: LiveData<List<String>> = _destinationList
+
+    private val _hotels = MutableLiveData<List<Hotel>>()
+    val hotels: LiveData<List<Hotel>> = _hotels
+
+    fun fetchHotels() {
+        viewModelScope.launch {
+            val request = HotelsRequest(
+                // TODO: get the actual location from the locationText
+                tourInterests = listOf(
+                    "Borobudur Temple",
+                    "Prambanan Temple",
+                )
+            )
+            val fetchedHotels = planRepository.findHotels(request)
+            _hotels.value = fetchedHotels
+        }
+    }
 
     fun onPlanNameTextChanged(newText: String) {
         _planNameText.value = newText
@@ -36,7 +60,7 @@ class CreatePlanViewModel : ViewModel() {
         _destinationList.value = currentList
     }
 
-    fun onDestinationTextCahnge(index: Int, newText:String) {
+    fun onDestinationTextCahnge(index: Int, newText: String) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
         currentList[index] = newText
         _destinationList.value = currentList

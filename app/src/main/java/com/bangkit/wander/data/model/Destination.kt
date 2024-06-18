@@ -1,15 +1,17 @@
 package com.bangkit.wander.data.model
 
-import kotlinx.serialization.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@Serializable
+
+@Parcelize
 data class Destination (
     val name: String,
     val location: Location
-)
+) : Parcelable
 
-@Serializable
+@Parcelize
 data class Location (
     val latitude: Double,
     val longitude: Double
-)
+) : Parcelable

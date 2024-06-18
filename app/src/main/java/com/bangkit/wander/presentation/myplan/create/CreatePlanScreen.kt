@@ -56,7 +56,9 @@ fun CreatePlanScreen(navController: NavHostController) {
             ) {
                 MyButton(
                     text = "Find Hotels",
-                    onClick = {navController.navigate(AppRoute.HOTEL_LIST)}
+                    onClick = {
+                        navController.navigate(AppRoute.HOTEL_LIST)
+                    }
                 )
             }
         }

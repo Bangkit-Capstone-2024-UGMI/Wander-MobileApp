@@ -8,7 +8,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
-    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -112,6 +111,9 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Maps SDK for Android
     implementation ("com.google.maps.android:maps-compose:4.4.1")
@@ -120,6 +122,4 @@ dependencies {
 
     // For permission handling
     implementation ("com.google.accompanist:accompanist-permissions:0.27.0")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 }
