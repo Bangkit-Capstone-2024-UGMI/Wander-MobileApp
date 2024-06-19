@@ -12,6 +12,9 @@ import com.bangkit.wander.data.model.Location
 import com.bangkit.wander.data.model.Plan
 import com.bangkit.wander.data.repository.PlanRepository
 import com.bangkit.wander.data.request.HotelsRequest
+import com.bangkit.wander.data.request.PlanHotelRequest
+import com.bangkit.wander.data.request.PlanRequest
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -57,13 +60,13 @@ class CreatePlanViewModel (
         }
     }
 
-    fun createPlan(plan: Plan) {
+    fun createPlan(plan: PlanRequest, hotel: PlanHotelRequest) {
         _loading.value = true
         viewModelScope.launch {
             try {
-                Log.d("CreatePlanViewModel", "createPlan: ${TemporaryData.newPlan}")
-                // buat contoh pake delay dulu
-                delay(4000)
+                val response = async { planRepository.createPlan(plan) }.await()
+                planRepository.addHotelToPlan(response.id, hotel)
+                _errorMessage.value = "Plan created successfully!"
             } catch (e: Exception) {
                 _errorMessage.value = "Failed to create plan: ${e.message}. Please try again."
             } finally {

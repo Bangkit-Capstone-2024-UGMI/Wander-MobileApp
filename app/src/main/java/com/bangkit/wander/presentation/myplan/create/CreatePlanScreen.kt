@@ -55,11 +55,11 @@ fun CreatePlanScreen(navController: NavHostController) {
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
-
+    // formatnya YYYY-MM-DD
     val datePickerDialog = DatePickerDialog(
         context,
         { _, selectedYear, selectedMonth, selectedDay ->
-            viewModel.onDateTextChanged("$selectedDay/${selectedMonth + 1}/$selectedYear")
+            viewModel.onDateTextChanged("$selectedYear/${selectedMonth + 1}/$selectedDay")
         }, year, month, day
     )
 

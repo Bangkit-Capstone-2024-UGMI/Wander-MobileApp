@@ -53,6 +53,9 @@ class HomePlanViewModel(
         viewModelScope.launch {
             try {
                 val fetchedPlan = repository.getPlanById(id)
+                if (fetchedPlan.hotel?.name == null) {
+                    fetchedPlan.hotel = null
+                }
                 _planDetail.value = fetchedPlan
             } catch (e: Exception) {
                 _errorMessage.value = "Failed to fetch plan: ${e.message}. Please try again."

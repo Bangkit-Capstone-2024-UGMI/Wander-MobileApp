@@ -6,6 +6,9 @@ import com.bangkit.wander.data.model.Hotel
 import com.bangkit.wander.data.remote.HotelService
 import com.bangkit.wander.data.remote.PlanService
 import com.bangkit.wander.data.request.HotelsRequest
+import com.bangkit.wander.data.request.PlanHotelRequest
+import com.bangkit.wander.data.request.PlanRequest
+import com.bangkit.wander.data.response.PlanResponse
 
 class PlanRepository (
     private val planService : PlanService,
@@ -25,6 +28,14 @@ class PlanRepository (
 
     suspend fun getPlanById(id: String) : Plan {
         return planService.getPlanById(id)
+    }
+
+    suspend fun createPlan(planRequest: PlanRequest) : PlanResponse {
+        return planService.createPlan(planRequest)
+    }
+
+    suspend fun addHotelToPlan(id: String, planHotelRequest: PlanHotelRequest) {
+        planService.addHotelToPlan(id, planHotelRequest)
     }
 
     companion object {

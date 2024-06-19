@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +39,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.bangkit.wander.data.local.TemporaryData
+import com.bangkit.wander.data.request.PlanHotelRequest
+import com.bangkit.wander.data.request.PlanRequest
 import com.bangkit.wander.presentation.ViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -57,7 +60,21 @@ fun SuccessScreen(
 
     LaunchedEffect(Unit) {
         TemporaryData.newPlan?.let {
-            viewModel.createPlan(it)
+            val planRequest = PlanRequest(
+                title = it.title,
+                date = it.date,
+                city = it.city,
+                destinations = it.destinations
+            )
+            val planHotelRequest = PlanHotelRequest(
+                name = it.hotel?.name ?: "",
+                formattedAddress = it.hotel?.formattedAddress ?: "",
+                distance = it.hotel?.distance ?: 0.0,
+                rating = it.hotel?.rating ?: 0.0,
+                predictedRankingScore = it.hotel?.predictedRankingScore ?: 0.0,
+                placeId = it.hotel?.placeId ?: ""
+            )
+            viewModel.createPlan(planRequest, planHotelRequest)
         }
     }
 
@@ -70,7 +87,11 @@ fun SuccessScreen(
         }
     }
 
-    Scaffold {
+    Scaffold (
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) {
         paddingValues ->
             Box(modifier = Modifier
                 .padding(paddingValues)
