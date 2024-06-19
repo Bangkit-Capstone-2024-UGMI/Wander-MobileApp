@@ -60,7 +60,7 @@ fun WanderScreen() {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
             ) {
-                MapScreen(state = viewModel.state.value)
+                MapScreen()
                 SearchBar(
                     modifier = Modifier.fillMaxWidth(),
                     query = text,

@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import com.bangkit.wander.presentation.ViewModelFactory
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -43,23 +44,64 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.currentCameraPositionState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
+import kotlinx.coroutines.tasks.await
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun MapScreen(state: MapState) {
+fun MapScreen() {
+    val context = LocalContext.current
+    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+
     val uttara = LatLng(-7.758196581853439, 110.38153731512409)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(uttara, 10f)
     }
-    val mapProperties = MapProperties(
-        isMyLocationEnabled = state.lastKnownLocation != null,
+
+    val locationPermissions = rememberMultiplePermissionsState(
+        permissions =
+        listOf(
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_COARSE_LOCATION"
+        ),
     )
+
+    LaunchedEffect(key1 = locationPermissions.permissions){
+        locationPermissions.launchMultiplePermissionRequest()
+        if (locationPermissions.allPermissionsGranted) {
+            try {
+                val location = fusedLocationClient.lastLocation.await()
+                location?.let {
+                    cameraPositionState.centerOnLocation(it)
+                }
+            } catch (e: SecurityException) {
+                // Handle exception (e.g., permission was denied)
+            }
+        }
+    }
+
+    val mapProperties = MapProperties(
+        isMyLocationEnabled = locationPermissions.allPermissionsGranted,
+        maxZoomPreference = 18f,
+        minZoomPreference = 5f,
+        isBuildingEnabled = true
+    )
+
+    val uiSettings = MapUiSettings(
+        compassEnabled = true,
+        myLocationButtonEnabled = true,
+        rotationGesturesEnabled = true,
+        tiltGesturesEnabled = true,
+        scrollGesturesEnabled = true
+    )
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             properties = mapProperties,
-            cameraPositionState = cameraPositionState
+            cameraPositionState = cameraPositionState,
+            uiSettings = uiSettings
         ) {
             Marker(
                 state = MarkerState(position = LatLng(-7.758196581853439, 110.38153731512409)),

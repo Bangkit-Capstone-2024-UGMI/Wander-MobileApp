@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class MapViewModel @Inject constructor(): ViewModel() {
 
-    val state: MutableState<MapState> = mutableStateOf(
+    private val state: MutableState<MapState> = mutableStateOf(
         MapState(
             lastKnownLocation = null,
         )
