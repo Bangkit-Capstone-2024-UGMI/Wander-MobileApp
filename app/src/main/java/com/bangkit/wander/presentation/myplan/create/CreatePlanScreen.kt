@@ -61,9 +61,6 @@ fun CreatePlanScreen(navController: NavHostController) {
                 MyButton(
                     text = "Find Hotels",
                     onClick = {
-//                        val hotelsRequest = viewModel.getHotelsRequest()
-//                        val bundle = Bundle()
-//                        bundle.putParcelable("hotels_request", hotelsRequest)
                         viewModel.saveHotelsRequest()
                         navController.navigate(
                             AppRoute.HOTEL_LIST
