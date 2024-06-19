@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bangkit.wander.data.local.TemporaryData
 import com.bangkit.wander.data.model.Hotel
 import com.bangkit.wander.data.repository.PlanRepository
 import com.bangkit.wander.data.request.HotelsRequest
@@ -28,18 +29,39 @@ class CreatePlanViewModel (
     private val _hotels = MutableLiveData<List<Hotel>>()
     val hotels: LiveData<List<Hotel>> = _hotels
 
-    fun fetchHotels() {
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
+
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+
+    fun fetchHotels(request: HotelsRequest) {
+        _loading.value = true
         viewModelScope.launch {
-            val request = HotelsRequest(
-                // TODO: get the actual location from the locationText
-                tourInterests = listOf(
-                    "Borobudur Temple",
-                    "Prambanan Temple",
-                )
-            )
-            val fetchedHotels = planRepository.findHotels(request)
-            _hotels.value = fetchedHotels
+            try {
+                val fetchedHotels = planRepository.findHotels(request)
+                _hotels.value = fetchedHotels
+            } catch (e: Exception) {
+                _errorMessage.value = "Failed to fetch hotels: ${e.message}"
+            } finally {
+                _loading.value = false
+            }
         }
+    }
+
+    fun saveHotelsRequest() {
+        TemporaryData.hotelsRequest = HotelsRequest(
+            userId = 123,
+            topN = 10,
+            tourInterests = listOf(
+                "Borobudur Temple",
+                "Prambanan Temple",
+            )
+        )
+    }
+
+    fun clearErrorMessage() {
+        _errorMessage.value = null
     }
 
     fun onPlanNameTextChanged(newText: String) {

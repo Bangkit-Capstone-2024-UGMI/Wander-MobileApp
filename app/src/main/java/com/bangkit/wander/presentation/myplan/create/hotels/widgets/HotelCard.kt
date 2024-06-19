@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -73,23 +74,30 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
 
             Column(
                 modifier = Modifier
-                    .padding(start = 24.dp)
+                    .padding(start = 18.dp)
                     .weight(1f),
             ) {
                 Text(
+                    maxLines = 2,
                     text = data.name,
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = AppColor.PrimaryDark)
                 )
                 Spacer(modifier = Modifier.size(6.dp))
+                val location = data.formattedAddress.split(", ")
+                val city = location[location.size - 3]
+                val district = location[location.size - 4]
                 Text(
-                    text = data.formattedAddress,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    text = "$district, $city",
                     style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                 )
                 Spacer(modifier = Modifier.size(6.dp))
 
                 Row {
+                    val formattedDistance = String.format("%.2f", data.distance)
                     Text(
-                        text = "${data.distance} KM ",
+                        text = "$formattedDistance KM ",
                         style = TextStyle(
                             fontSize = 14.sp,
                             color = AppColor.PrimaryBlue,

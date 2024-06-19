@@ -1,5 +1,7 @@
 package com.bangkit.wander.presentation.myplan.create
 
+import android.os.Bundle
+import android.util.Log
 import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.theme.AppColor
 import com.bangkit.wander.app.widgets.MyButton
@@ -30,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigator
+import com.google.gson.Gson
 
 @Composable
 fun CreatePlanScreen(navController: NavHostController) {
@@ -57,7 +61,13 @@ fun CreatePlanScreen(navController: NavHostController) {
                 MyButton(
                     text = "Find Hotels",
                     onClick = {
-                        navController.navigate(AppRoute.HOTEL_LIST)
+//                        val hotelsRequest = viewModel.getHotelsRequest()
+//                        val bundle = Bundle()
+//                        bundle.putParcelable("hotels_request", hotelsRequest)
+                        viewModel.saveHotelsRequest()
+                        navController.navigate(
+                            AppRoute.HOTEL_LIST
+                        )
                     }
                 )
             }

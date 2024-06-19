@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.bangkit.wander.data.request.HotelsRequest
 import com.bangkit.wander.presentation.profile.ProfileScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
 import com.bangkit.wander.presentation.search.WanderScreen
@@ -35,7 +36,7 @@ class AppRoute {
         const val ACCOUNT = "account"
 
         const val CREATE_PLAN = "my_plan/create"
-        const val HOTEL_LIST = "my_plan/create/hotel_list"
+        const val HOTEL_LIST = "my_plan/create/hotel_list/{hotels_request}"
         const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
@@ -57,7 +58,18 @@ fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = AppRoute.MAIN ) {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
-        composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }
+        composable(
+            route = AppRoute.HOTEL_LIST,
+//            arguments = listOf(
+//                navArgument("hotels_request") { type = NavType.ParcelableType(HotelsRequest::class.java)}
+//            )
+        ) {
+//            val hotelsRequest = navBackStackEntry.arguments?.getParcelable<HotelsRequest>("hotels_request")
+//            hotelsRequest?.let { request ->
+//                HotelListScreen(navController, request)
+//            }
+            HotelListScreen(navController)
+        }
         composable(
             route = AppRoute.PLAN_DETAIL,
             arguments = listOf(
