@@ -37,7 +37,7 @@ class AppRoute {
 
         const val CREATE_PLAN = "my_plan/create"
         const val HOTEL_LIST = "my_plan/create/hotel_list/{hotels_request}"
-        const val PLAN_DETAIL = "my_plan/plan_detail"
+        const val PLAN_DETAIL = "my_plan/plan_detail/{planId}"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
     }
@@ -59,7 +59,14 @@ fun AppNavigation(navController: NavHostController) {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
         composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }
-        composable(AppRoute.PLAN_DETAIL) { PlanDetailScreen(navController) }
+        composable(
+            route = AppRoute.PLAN_DETAIL,
+            arguments = listOf(
+                navArgument("planId") { type = NavType.StringType }
+            )) { backStackEntry ->
+            val planId = backStackEntry.arguments?.getString("planId")
+            PlanDetailScreen(navController, planId ?: "")
+        }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
     }

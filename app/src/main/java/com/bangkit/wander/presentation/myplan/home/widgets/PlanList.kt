@@ -107,8 +107,9 @@ fun PlanList (navController: NavHostController) {
                             PlanCard(
                                 data = plans[index],
                                 onClick = {
-                                    TemporaryData.planDetail = plans[index]
-                                    navController.navigate(AppRoute.PLAN_DETAIL)
+                                    plans[index].id?.let {
+                                        navController.navigate(AppRoute.PLAN_DETAIL.replace("{planId}", it))
+                                    }
                                 })
                         }
                     }

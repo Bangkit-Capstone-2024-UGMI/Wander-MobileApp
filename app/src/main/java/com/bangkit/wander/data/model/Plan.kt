@@ -15,6 +15,8 @@ data class Plan (
 
     val city: String,
     val destinations: List<Destination>,
+
+    @field:SerializedName("selectedHotel")
     var hotel: Hotel? = null
 ) : Parcelable
 
