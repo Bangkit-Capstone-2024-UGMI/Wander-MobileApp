@@ -27,17 +27,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.data.local.TemporaryData
+import com.bangkit.wander.data.model.Hotel
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.HotelCard
 
 
 @Composable
 fun PlanDetailScreen(
     navController: NavHostController
 ) {
-    val context = LocalContext.current
-    val viewModel: HomePlanViewModel = viewModel(
-        factory = ViewModelFactory.getInstance(context)
-    )
     val plan = TemporaryData.planDetail
 
     Scaffold(
@@ -89,6 +88,26 @@ fun PlanDetailScreen(
                             icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" ) }
                         )
                         Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Destinations",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = AppColor.PrimaryDark
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    plan?.hotel?.let {
+                        HotelCard(
+                            data = it,
+                            onClick = {
+                                TemporaryData.hotelDetail = it
+                                TemporaryData.sourceHotel = "planDetail"
+                                navController.navigate(AppRoute.HOTEL_DETAIL)
+                            }
+                        )
                     }
                 }
             }

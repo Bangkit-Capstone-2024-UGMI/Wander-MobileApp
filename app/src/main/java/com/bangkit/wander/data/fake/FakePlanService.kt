@@ -37,7 +37,7 @@ class FakePlanService {
                 ),
                 Hotel(
                     "Hotel 1",
-                    "Bali, Indonesia",
+                    "Royal Maguwo Jl. Bungur No.2, Kadirojo II, Purwomartani, Kec. Kalasan, Sleman Yogyakarta, Daerah Istimewa Yogyakarta 55571, Indonesia",
                     4.5,
                     4.0,
                     123.123,
@@ -63,7 +63,7 @@ class FakePlanService {
                 ),
                 Hotel(
                     "Hotel 1",
-                    "Bali, Indonesia",
+                    "Royal Maguwo Jl. Bungur No.2, Kadirojo II, Purwomartani, Kec. Kalasan, Sleman Yogyakarta, Daerah Istimewa Yogyakarta 55571, Indonesia",
                     4.5,
                     4.0,
                     123.123,

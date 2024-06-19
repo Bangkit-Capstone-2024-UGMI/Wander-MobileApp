@@ -5,6 +5,7 @@ import com.bangkit.wander.data.model.Plan
 import com.bangkit.wander.data.request.HotelsRequest
 
 object TemporaryData {
+    var sourceHotel: String? = null
     var hotelsRequest : HotelsRequest? = null
     var planDetail: Plan? = null
     var hotelDetail: Hotel? = null

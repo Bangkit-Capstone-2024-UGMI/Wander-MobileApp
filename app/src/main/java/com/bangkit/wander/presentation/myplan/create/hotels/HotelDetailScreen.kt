@@ -39,22 +39,25 @@ fun HotelDetailScreen(
     navController: NavHostController
 ) {
     val hotel = TemporaryData.hotelDetail
+    val sourceHotel = TemporaryData.sourceHotel
     Scaffold (
         topBar = {
              MyTopAppBar(title = "Hotel Detail", showBackButton = true, onBackClick = { navController.popBackStack() })
         },
         bottomBar = {
-            Box(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
-            ) {
-                MyButton(
-                    text = "Select Hotel",
-                    onClick = {navController.navigate(AppRoute.SUCCESS_CREATE) {
-                        popUpTo(AppRoute.MAIN) {
-                            inclusive = false
-                        }
-                    } }
-                )
+            if (sourceHotel == "hotelList") {
+                Box(
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                ) {
+                    MyButton(
+                        text = "Select Hotel",
+                        onClick = {navController.navigate(AppRoute.SUCCESS_CREATE) {
+                            popUpTo(AppRoute.MAIN) {
+                                inclusive = false
+                            }
+                        } }
+                    )
+                }
             }
         }
     ) {
@@ -78,7 +81,9 @@ fun HotelDetailScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Column {
+                                Column (
+                                    modifier = Modifier.weight(1f)
+                                ) {
                                     Text(
                                         text = hotel?.name ?: "Hotel Name",
                                         style = TextStyle(
