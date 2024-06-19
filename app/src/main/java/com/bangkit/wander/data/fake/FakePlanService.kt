@@ -3,7 +3,9 @@ package com.bangkit.wander.data.fake
 import com.bangkit.wander.data.model.Plan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bangkit.wander.data.model.Destination
 import com.bangkit.wander.data.model.Hotel
+import com.bangkit.wander.data.model.Location
 
 class FakePlanService {
 
@@ -17,7 +19,22 @@ class FakePlanService {
                 "Holiday Bro",
                 "2021-10-10",
                 "Bali, Indonesia",
-                listOf(),
+                listOf(
+                    Destination(
+                        "Bali, Indonesia",
+                        Location(
+                            123.123,
+                            1.9,
+                        )
+                    ),
+                    Destination(
+                        "Bali, Indonesia",
+                        Location(
+                            123.123,
+                            1.9,
+                        )
+                    )
+                ),
                 Hotel(
                     "Hotel 1",
                     "Bali, Indonesia",
@@ -35,7 +52,15 @@ class FakePlanService {
                 "Holiday Bro",
                 "2021-10-10",
                 "Bali, Indonesia",
-                listOf(),
+                listOf(
+                    Destination(
+                        "Bali, Indonesia",
+                        Location(
+                            123.123,
+                            1.9,
+                        )
+                    )
+                ),
                 Hotel(
                     "Hotel 1",
                     "Bali, Indonesia",

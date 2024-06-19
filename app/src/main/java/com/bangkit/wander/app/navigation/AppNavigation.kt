@@ -37,7 +37,7 @@ class AppRoute {
 
         const val CREATE_PLAN = "my_plan/create"
         const val HOTEL_LIST = "my_plan/create/hotel_list/{hotels_request}"
-        const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
+        const val PLAN_DETAIL = "my_plan/plan_detail"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
     }

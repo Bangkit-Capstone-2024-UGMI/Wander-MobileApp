@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -38,9 +39,6 @@ fun PlanDetailScreen(
         factory = ViewModelFactory.getInstance(context)
     )
     val plan = TemporaryData.planDetail
-    val planNameText by viewModel.planNameText.observeAsState(initial = plan?.title)
-    val dateText by viewModel.planDateText.observeAsState(initial = plan?.date)
-    val locationText by viewModel.planLocationText.observeAsState(initial = plan?.city)
 
     Scaffold(
         topBar = {
@@ -56,19 +54,19 @@ fun PlanDetailScreen(
                     MyTextField(
                         label = "Plan Name",
                         readOnly = true,
-                        value = planNameText?:"",
+                        value = plan?.title?:"Plan Name",
                     )
                     Spacer(modifier = Modifier.height(16.dp))
 
                     MyTextField(
                         label = "Date",
-                        value = dateText?:"",
+                        value = plan?.date?:"00-00-0000",
                         icon = { Icon(imageVector = Icons.Default.DateRange, contentDescription = "Date" ) },
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     MyTextField(
                         label = "Location",
-                        value = locationText?:"",
+                        value = plan?.city?:"Plan Location",
                         icon = { Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location" ) }
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -80,17 +78,18 @@ fun PlanDetailScreen(
                             color = AppColor.PrimaryDark
                         )
                     )
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                    destinationList.forEach { it ->
-//                        MyTextField(
-//                            label = null,
-//                            placeholder = "Find a destination",
-//                            value = it,
-//                            onValueChange = { viewModel.addDestination(it) },
-//                            icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" ) }
-//                        )
-//                        Spacer(modifier = Modifier.height(8.dp))
-//                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    val destinationList = plan?.destinations?: emptyList()
+                    destinationList.forEach {
+                        MyTextField(
+                            label = null,
+                            placeholder = "Find a destination",
+                            readOnly = true,
+                            value = it.name,
+                            icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" ) }
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
             }
         }

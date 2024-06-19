@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.bangkit.wander.data.local.TemporaryData
 
 @Composable
 fun PlanList (itemsData: List<Plan>, navController: NavHostController) {
@@ -61,8 +62,8 @@ fun PlanList (itemsData: List<Plan>, navController: NavHostController) {
                     PlanCard(
                         data = itemsData[index],
                         onClick = {
-                            navController.navigate(
-                                route = AppRoute.PLAN_DETAIL.replace("{id}", itemsData[index].id))
+                            TemporaryData.planDetail = itemsData[index]
+                            navController.navigate(AppRoute.PLAN_DETAIL)
                         })
                 }
             }
