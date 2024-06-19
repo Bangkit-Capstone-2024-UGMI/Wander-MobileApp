@@ -17,6 +17,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,6 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -82,8 +84,17 @@ fun HotelListScreen(
         ) {
             when {
                 loading -> {
-                    Box(modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
+                    Box(modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(), contentAlignment = Alignment.Center) {
+                        Column (horizontalAlignment = Alignment.CenterHorizontally) {
+                            CircularProgressIndicator()
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            Text(
+                                text = "AI is searching for\nthe best hotels near your destinations...",
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 }
                 hotels.isEmpty() -> {
@@ -103,6 +114,7 @@ fun HotelListScreen(
                                         data = hotel,
                                         onClick = {
                                             TemporaryData.hotelDetail = hotel
+                                            TemporaryData.sourceHotel = "hotelList"
                                             navController.navigate(AppRoute.HOTEL_DETAIL)
                                         }
                                     )
