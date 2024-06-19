@@ -65,22 +65,22 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Box(
-                modifier = Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(4.dp))
-            ) {
-                AsyncImage(
-                    model = "https://www.gstatic.com/webp/gallery/1.jpg",
-                    contentDescription = "Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+//            Box(
+//                modifier = Modifier
+//                    .size(80.dp)
+//                    .clip(RoundedCornerShape(4.dp))
+//            ) {
+//                AsyncImage(
+//                    model = "https://www.gstatic.com/webp/gallery/1.jpg",
+//                    contentDescription = "Image",
+//                    contentScale = ContentScale.Crop,
+//                    modifier = Modifier.fillMaxSize()
+//                )
+//            }
 
             Column(
                 modifier = Modifier
-                    .padding(start = 18.dp)
+                    .padding(12.dp)
                     .weight(1f),
             ) {
                 Text(

@@ -59,12 +59,14 @@ fun PlanDetailScreen(
 
                     MyTextField(
                         label = "Date",
+                        readOnly = true,
                         value = plan?.date?:"00-00-0000",
                         icon = { Icon(imageVector = Icons.Default.DateRange, contentDescription = "Date" ) },
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     MyTextField(
                         label = "Location",
+                        readOnly = true,
                         value = plan?.city?:"Plan Location",
                         icon = { Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location" ) }
                     )
@@ -90,16 +92,16 @@ fun PlanDetailScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                     }
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Destinations",
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = AppColor.PrimaryDark
-                        )
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
                     plan?.hotel?.let {
+                        Text(
+                            text = "Hotel",
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = AppColor.PrimaryDark
+                            )
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
                         HotelCard(
                             data = it,
                             onClick = {

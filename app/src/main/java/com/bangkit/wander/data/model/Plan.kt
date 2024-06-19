@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Plan (
     val id: String? = null,
-    val userId: Long? = null,
+    val userId: String? = null,
     val title: String,
 
     @field:SerializedName("startDate")

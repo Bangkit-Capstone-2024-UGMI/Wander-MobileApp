@@ -14,11 +14,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,7 +33,7 @@ fun MyTextField(
     readOnly: Boolean = false,
     isPlanField: Boolean = false,
     onCloseField: () -> Unit = {},
-    onClick: () -> Unit = {}
+    onClick: (() -> Unit)? = null
 ) {
     Column (
         modifier = Modifier.fillMaxWidth()
@@ -55,8 +53,7 @@ fun MyTextField(
             enabled = !readOnly,
             readOnly = readOnly,
             shape = CircleShape,
-            modifier = Modifier
-                .fillMaxWidth().clickable(onClick = onClick),
+            modifier = if (onClick == null) Modifier.fillMaxWidth() else Modifier.fillMaxWidth().clickable(onClick = onClick),
             value = value,
             onValueChange = {
                 onValueChange(it)

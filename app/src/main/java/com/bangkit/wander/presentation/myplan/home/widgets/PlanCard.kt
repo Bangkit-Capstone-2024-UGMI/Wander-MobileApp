@@ -58,21 +58,21 @@ fun PlanCard(data: Plan, onClick: () -> Unit) {
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier
-                    .size(80.dp)
-                    .clip(RoundedCornerShape(4.dp))
-            ) {
-                AsyncImage(
-                    model = "https://images.unsplash.com/photo-1612830725323-3b1b0b2b1b3d",
-                    contentDescription = "Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+//            Box(
+//                modifier = Modifier
+//                    .size(80.dp)
+//                    .clip(RoundedCornerShape(4.dp))
+//            ) {
+//                AsyncImage(
+//                    model = "https://images.unsplash.com/photo-1612830725323-3b1b0b2b1b3d",
+//                    contentDescription = "Image",
+//                    contentScale = ContentScale.Crop,
+//                    modifier = Modifier.fillMaxSize()
+//                )
+//            }
             Column(
                 modifier = Modifier
-                    .padding(start = 24.dp)
+                    .padding(12.dp)
                     .weight(1f),
             ) {
                  Text(

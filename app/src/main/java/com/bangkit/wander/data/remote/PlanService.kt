@@ -9,9 +9,9 @@ interface PlanService {
 //    @POST("itineraryPlan")
 //    suspend fun createPlan(@Body request: PlanRequest)
 
-    @GET("itineraryPlan")
+    @GET("api/itineraryPlan")
     suspend fun getAllPlans(): List<Plan>
 
-    @GET("itineraryPlan/{id}")
+    @GET("api/itineraryPlan/{id}")
     suspend fun getPlanById(@Path("id") id: String): Plan
 }

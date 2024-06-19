@@ -15,7 +15,7 @@ class FakePlanService {
         planList.value = listOf(
             Plan(
                 "1",
-                123,
+                "123",
                 "Holiday Bro",
                 "2021-10-10",
                 "Bali, Indonesia",
@@ -48,7 +48,7 @@ class FakePlanService {
             ),
             Plan(
                 "1",
-                123,
+                "123",
                 "Holiday Bro",
                 "2021-10-10",
                 "Bali, Indonesia",
