@@ -21,18 +21,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.bangkit.wander.data.local.TemporaryData
+import com.bangkit.wander.presentation.ViewModelFactory
+import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.ConfirmationDialog
 
 @Composable
 fun HotelDetailScreen(
@@ -40,6 +47,8 @@ fun HotelDetailScreen(
 ) {
     val hotel = TemporaryData.hotelDetail
     val sourceHotel = TemporaryData.sourceHotel
+    val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
+
     Scaffold (
         topBar = {
              MyTopAppBar(title = "Hotel Detail", showBackButton = true, onBackClick = { navController.popBackStack() })
@@ -51,11 +60,7 @@ fun HotelDetailScreen(
                 ) {
                     MyButton(
                         text = "Select Hotel",
-                        onClick = {navController.navigate(AppRoute.SUCCESS_CREATE) {
-                            popUpTo(AppRoute.MAIN) {
-                                inclusive = false
-                            }
-                        } }
+                        onClick = {setShowDialog(true)}
                     )
                 }
             }
@@ -63,6 +68,22 @@ fun HotelDetailScreen(
     ) {
         paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
+                ConfirmationDialog(
+                    showDialog = showDialog,
+                    onDismiss = { setShowDialog(false) },
+                    onConfirm = {
+                        TemporaryData.newPlan?.hotel = TemporaryData.hotelDetail
+                        navController.navigate(AppRoute.SUCCESS_CREATE) {
+                            popUpTo(AppRoute.MAIN) {
+                                inclusive = false
+                            }
+                        }
+                    },
+                    title = "Confirm Action",
+                    text = "Are you sure you want to create plan with this hotel?",
+                    confirmButtonText = "Yes",
+                    dismissButtonText = "No"
+                )
                 LazyColumn(){
                     item {
                         AsyncImage(

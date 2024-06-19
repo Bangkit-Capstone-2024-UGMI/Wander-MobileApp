@@ -6,15 +6,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Plan (
-    val id: String,
-    val userId: Long,
+    val id: String? = null,
+    val userId: Long? = null,
     val title: String,
 
     @field:SerializedName("startDate")
     val date: String,
-    
+
     val city: String,
     val destinations: List<Destination>,
-    val hotel: Hotel
+    var hotel: Hotel? = null
 ) : Parcelable
 
