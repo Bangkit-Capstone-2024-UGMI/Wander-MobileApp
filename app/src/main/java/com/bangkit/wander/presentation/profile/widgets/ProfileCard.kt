@@ -32,11 +32,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.bangkit.wander.presentation.ViewModelFactory
 
 @Composable
 fun ProfileCard() {
-    val profileViewModel: ProfileViewModel = viewModel()
-    val currentUser by profileViewModel.currentUser.observeAsState()
+    val context = LocalContext.current
+    val viewModel: ProfileViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
+    val currentUser by viewModel.currentUser.observeAsState()
 
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -61,17 +65,18 @@ fun ProfileCard() {
                 currentUser?.let { user ->
                     user.photoUrl?.let {
                         AsyncImage(
+                            modifier = Modifier.size(100.dp).clip(CircleShape),
                             model = ImageRequest.Builder(LocalContext.current)
                                 .data(it)
                                 .crossfade(true)
                                 .build(),
-                            contentDescription = "User Image",
-                            contentScale = ContentScale.Crop
+                            contentDescription = "User Image"
                         )
                     }
                 }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column(
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(
                     verticalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxHeight()
                 ) {
@@ -97,4 +102,3 @@ fun ProfileCard() {
             }
         }
     }
-}

@@ -53,7 +53,7 @@ fun AppNavBottomBar(navController: NavHostController, mainNavController: NavHost
         composable(AppRoute.WANDER) { WanderScreen() }
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
         composable(AppRoute.FAVORITE) { SavedScreen() }
-        composable(AppRoute.ACCOUNT) { ProfileScreen(navController) }
+        composable(AppRoute.ACCOUNT) { ProfileScreen(mainNavController) }
     }
 }
 

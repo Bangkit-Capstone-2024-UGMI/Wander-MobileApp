@@ -1,6 +1,8 @@
 package com.bangkit.wander.presentation.profile
 
 
+import android.content.Context
+import android.content.Intent
 import com.bangkit.wander.app.widgets.MyTopAppBar
 import com.bangkit.wander.presentation.profile.widgets.ProfileCard
 import com.bangkit.wander.presentation.profile.widgets.SettingCard
@@ -19,20 +21,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.bangkit.wander.app.navigation.AppRoute
+import com.bangkit.wander.presentation.ViewModelFactory
+import com.bangkit.wander.presentation.login.LoginActivity
 
 @Composable
 fun ProfileScreen(navController: NavHostController) {
-    val profileViewModel: ProfileViewModel = viewModel()
+    val context = LocalContext.current
+    val profileViewModel: ProfileViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
 
     Scaffold(
         topBar = {
@@ -69,6 +73,7 @@ fun ProfileScreen(navController: NavHostController) {
             Button(
                 onClick = {
                     profileViewModel.signOut()
+                    navigateToLoginActivity(context)
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFB3261E),
@@ -84,6 +89,11 @@ fun ProfileScreen(navController: NavHostController) {
     }
 }
 
+private fun navigateToLoginActivity(context: Context) {
+    val intent = Intent(context, LoginActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    context.startActivity(intent)
+}
 
 
 
