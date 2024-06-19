@@ -6,7 +6,6 @@ import com.bangkit.wander.presentation.saved.widgets.SavedCardItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -26,19 +24,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.widgets.MyButton
+import com.bangkit.wander.presentation.ViewModelFactory
 import com.bangkit.wander.presentation.saved.widgets.SavedCard
 
 @Composable
-fun SavedScreen(savedViewModel: SavedViewModel = viewModel()) {
-    val navController = rememberNavController()
+fun SavedScreen(navController: NavHostController) {
+    val context = LocalContext.current
+    val savedViewModel: SavedViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
     val items = savedViewModel.items
     val showDialog = remember { mutableStateOf(false) }
     val showEditDialog = remember { mutableStateOf(false) }
@@ -171,7 +172,7 @@ fun CardList(
             SavedCard(
                 item = item,
                 onClick = {
-                    navController.navigate("${AppRoute.PLACE_LIST}/${item.id}")
+                    navController.navigate(AppRoute.PLACE_LIST)
                 },
                 onEdit = { onItemAction(it, "edit") },
                 onDelete = { onItemAction(it, "delete") }

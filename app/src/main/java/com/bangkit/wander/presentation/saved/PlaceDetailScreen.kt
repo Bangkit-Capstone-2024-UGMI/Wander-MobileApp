@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,11 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun PlaceDetailScreen(navController: NavHostController) {
@@ -109,9 +106,9 @@ fun PlaceDetailScreen(navController: NavHostController) {
                             .width(90.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
-                        border = BorderStroke(1.dp, Color(0xFFF4D160)),  // Custom outline color
+                        border = BorderStroke(1.dp, Color(0xFFF4D160)),
                         colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Color(0xFFF4D160)  // Custom text color
+                            contentColor = Color(0xFFF4D160)
                         )
                     ) {
                         Text(text = "Start")
