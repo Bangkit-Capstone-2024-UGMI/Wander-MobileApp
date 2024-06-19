@@ -92,7 +92,8 @@ fun SuccessScreen(
                                     CircularProgressIndicator()
                                     Spacer(modifier = Modifier.padding(8.dp))
                                     Text(
-                                        text = "AI is searching for\nthe best hotels near your destinations...",
+                                        text = "Your plan is being created...\n" +
+                                                "Please wait a moment.",
                                         textAlign = TextAlign.Center
                                     )
                                 }

@@ -19,12 +19,14 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MyButton(
+    enable: Boolean = true,
     text : String,
     onClick : () -> Unit,
     icon: @Composable (() -> Unit)? = null,
     isSecondary : Boolean = false
 ) {
     Button(
+        enabled = enable,
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
         border = if (isSecondary) BorderStroke(1.dp, AppColor.PrimaryYellow) else null,

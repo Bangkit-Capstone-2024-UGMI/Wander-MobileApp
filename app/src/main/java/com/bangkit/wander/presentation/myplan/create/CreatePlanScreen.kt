@@ -63,6 +63,8 @@ fun CreatePlanScreen(navController: NavHostController) {
         }, year, month, day
     )
 
+    val isFormValid by viewModel.isFormValid.observeAsState(initial = false)
+
     Scaffold (
         topBar = {
             MyTopAppBar(
@@ -75,6 +77,7 @@ fun CreatePlanScreen(navController: NavHostController) {
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             ) {
                 MyButton(
+                    enable = isFormValid,
                     text = "Find Hotels",
                     onClick = {
                         viewModel.saveHotelsRequest()
@@ -136,7 +139,7 @@ fun CreatePlanScreen(navController: NavHostController) {
                                 label = null,
                                 placeholder = "Find a destination",
                                 value = destinationList[i],
-                                onValueChange = { viewModel.onDestinationTextCahnge(i, it) },
+                                onValueChange = { viewModel.onDestinationTextChange(i, it) },
                                 icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )},
                                 isPlanField = i!=0,
                                 onCloseField = { viewModel.removeDestination(i) }

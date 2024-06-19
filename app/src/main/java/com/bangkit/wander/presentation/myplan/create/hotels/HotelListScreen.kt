@@ -91,7 +91,8 @@ fun HotelListScreen(
                             CircularProgressIndicator()
                             Spacer(modifier = Modifier.padding(8.dp))
                             Text(
-                                text = "Your plan is being created...\nPlease wait a moment.",
+                                text = "AI is searching for\n" +
+                                        "the best hotels near your destinations...",
                                 textAlign = TextAlign.Center
                             )
                         }

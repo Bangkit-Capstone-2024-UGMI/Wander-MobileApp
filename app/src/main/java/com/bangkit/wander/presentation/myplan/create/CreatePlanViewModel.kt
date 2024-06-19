@@ -40,6 +40,9 @@ class CreatePlanViewModel (
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
+    private val _isFormValid = MutableLiveData(false)
+    val isFormValid: LiveData<Boolean> = _isFormValid
+
     fun fetchHotels(request: HotelsRequest) {
         _loading.value = true
         viewModelScope.launch {
@@ -58,7 +61,6 @@ class CreatePlanViewModel (
         _loading.value = true
         viewModelScope.launch {
             try {
-
                 Log.d("CreatePlanViewModel", "createPlan: ${TemporaryData.newPlan}")
                 // buat contoh pake delay dulu
                 delay(4000)
@@ -71,7 +73,6 @@ class CreatePlanViewModel (
     }
 
     fun saveHotelsRequest() {
-
         // filter without "" and remove trailing spaces
         val destinationListString = _destinationList.value.orEmpty().filter { it.isNotBlank() }.map { it.trim() }
 
@@ -103,33 +104,46 @@ class CreatePlanViewModel (
 
     fun onPlanNameTextChanged(newText: String) {
         _planNameText.value = newText
+        validateForm()
     }
 
     fun onDateTextChanged(newText: String) {
         _dateText.value = newText
+        validateForm()
     }
 
     fun onLocationTextChanged(newText: String) {
         _locationText.value = newText
+        validateForm()
     }
 
     fun addDestination(newDestination: String) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
         currentList.add(newDestination)
         _destinationList.value = currentList
+        validateForm()
     }
 
-    fun onDestinationTextCahnge(index: Int, newText: String) {
+    fun onDestinationTextChange(index: Int, newText: String) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
         currentList[index] = newText
         _destinationList.value = currentList
+        validateForm()
     }
 
     fun removeDestination(index: Int) {
         val currentList = _destinationList.value.orEmpty().toMutableList()
         currentList.removeAt(index)
         _destinationList.value = currentList
+        validateForm()
     }
 
+    private fun validateForm() {
+        _isFormValid.value = !(_planNameText.value.isNullOrEmpty() ||
+                _dateText.value.isNullOrEmpty() ||
+                _locationText.value.isNullOrEmpty() ||
+                _destinationList.value.isNullOrEmpty() ||
+                _destinationList.value?.any { it.isEmpty() } == true)
+    }
 
 }
