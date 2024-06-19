@@ -36,6 +36,12 @@ import coil.compose.AsyncImage
 
 @Composable
 fun HotelCard(data: Hotel, onClick: () -> Unit){
+    val location = data.formattedAddress.split(", ")
+    val city = location[location.size - 3]
+    val district = location[location.size - 4]
+
+    val formattedDistance = String.format("%.2f", data.distance)
+
     Card(modifier = Modifier
         .fillMaxWidth()
         .clickable(onClick = onClick)
@@ -83,9 +89,7 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
                     style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = AppColor.PrimaryDark)
                 )
                 Spacer(modifier = Modifier.size(6.dp))
-                val location = data.formattedAddress.split(", ")
-                val city = location[location.size - 3]
-                val district = location[location.size - 4]
+
                 Text(
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
@@ -95,7 +99,6 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
                 Spacer(modifier = Modifier.size(6.dp))
 
                 Row {
-                    val formattedDistance = String.format("%.2f", data.distance)
                     Text(
                         text = "$formattedDistance KM ",
                         style = TextStyle(
