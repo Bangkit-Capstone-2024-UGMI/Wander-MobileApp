@@ -5,7 +5,8 @@ import com.bangkit.wander.data.repository.AuthRepository
 import com.bangkit.wander.data.repository.PlanRepository
 import android.content.Context
 import com.bangkit.wander.core.network.ApiConfig
-import com.bangkit.wander.data.remote.HotelsService
+import com.bangkit.wander.data.remote.HotelService
+import com.bangkit.wander.data.remote.PlanService
 import com.google.firebase.auth.FirebaseAuth
 
 object Injection {
@@ -18,11 +19,11 @@ object Injection {
     }
 
     fun providePlanRepository(context: Context): PlanRepository {
-        val planService = FakePlanService()
-        val hotelsService = ApiConfig.getMLService(HotelsService::class.java)
+        val planService = ApiConfig.getApiService(PlanService::class.java)
+        val hotelService = ApiConfig.getMLService(HotelService::class.java)
         return PlanRepository.getInstance(
             planService = planService,
-            hotelsService = hotelsService
+            hotelService = hotelService
         )
     }
 }
