@@ -42,10 +42,10 @@ fun PlacesListScreen(
 ) {
 
     val samplePlaces = listOf(
-        PlaceData("Place 1", "Location 1", R.drawable.location),
-        PlaceData("Place 2", "Location 2", R.drawable.location),
-        PlaceData("Place 3", "Location 3", R.drawable.location),
-        PlaceData("Place 4", "Location 4", R.drawable.location)
+        PlaceData("Hotel Kurniawan", "Cianjur", R.drawable.location),
+        PlaceData("Hotel Kurniawan", "Cianjur", R.drawable.location),
+        PlaceData("Hotel Kurniawan", "Cianjur", R.drawable.location),
+        PlaceData("Hotel Kurniawan", "Cianjur", R.drawable.location)
     )
 
     Column(

@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     }
     override fun onStart() {
         super.onStart()
-        viewModel.checkCurrentUser()
+        //viewModel.checkCurrentUser()
     }
 
     private fun setupAction() {

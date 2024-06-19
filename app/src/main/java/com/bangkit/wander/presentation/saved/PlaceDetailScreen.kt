@@ -78,11 +78,11 @@ fun PlaceDetailScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = "Place Name", fontSize = 32.sp)
+                Text(text = "Hotel Kurniawan", fontSize = 22.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Place Location", fontSize = 22.sp)
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Place Description", fontSize = 16.sp)
+                Text(text = "Cianjur", fontSize = 18.sp)
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = "Gadog, Pacet, Cianjur Regency, West Java 43253", fontSize = 16.sp)
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Buttons for directions

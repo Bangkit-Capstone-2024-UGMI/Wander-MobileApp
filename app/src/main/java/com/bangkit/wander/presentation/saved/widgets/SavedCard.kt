@@ -52,7 +52,7 @@ fun SavedCard(
     item: SavedCardItem,
     onEdit: (SavedCardItem) -> Unit,
     onDelete: (SavedCardItem) -> Unit,
-    onClick: (SavedCardItem) -> Unit
+    onClick: () -> Unit
 ) {
     var showMenu by remember { mutableStateOf(false) }
 
@@ -62,7 +62,7 @@ fun SavedCard(
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
             .height(52.dp)
-            .clickable { onClick(item) },
+            .clickable (onClick = onClick),
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color(0xFFF4D160)  // Custom card color
         )

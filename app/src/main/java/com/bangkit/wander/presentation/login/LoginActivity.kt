@@ -35,7 +35,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onStart() {
         super.onStart()
-        viewModel.checkCurrentUser()
+        startActivity(Intent(this, MainActivity::class.java))
+        //viewModel.checkCurrentUser()
     }
 
     private fun setupAction() {
