@@ -1,5 +1,6 @@
 package com.bangkit.wander.presentation.myplan.create
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import com.bangkit.wander.app.navigation.AppRoute
@@ -24,6 +25,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -34,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.Navigator
 import com.google.gson.Gson
+import java.util.Calendar
 
 @Composable
 fun CreatePlanScreen(navController: NavHostController) {
@@ -46,6 +50,18 @@ fun CreatePlanScreen(navController: NavHostController) {
     val dateText by viewModel.dateText.observeAsState(initial = "")
     val locationText by viewModel.locationText.observeAsState(initial = "")
     val destinationList by viewModel.destinationList.observeAsState(initial = listOf())
+
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, selectedYear, selectedMonth, selectedDay ->
+            viewModel.onDateTextChanged("$selectedDay/${selectedMonth + 1}/$selectedYear")
+        }, year, month, day
+    )
 
     Scaffold (
         topBar = {
@@ -85,6 +101,11 @@ fun CreatePlanScreen(navController: NavHostController) {
                         Spacer(modifier = Modifier.height(16.dp))
 
                         MyTextField(
+                            readOnly = true,
+                            onClick = {
+                                datePickerDialog.show()
+                                viewModel.onDateTextChanged(dateText)
+                            },
                             label = "Date",
                             placeholder = "Enter your plan date",
                             value = dateText,
