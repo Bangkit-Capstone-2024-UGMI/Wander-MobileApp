@@ -30,23 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bangkit.wander.R
 
-@Preview(showBackground = true)
-@Composable
-fun SavedCardPreview() {
-    val sampleItem = SavedCardItem(
-        id = 1,
-        title = "Sample Place",
-        iconResource = R.drawable.star // Replace with an actual drawable resource
-    )
-
-    SavedCard(
-        item = sampleItem,
-        onEdit = { /* Handle edit */ },
-        onDelete = { /* Handle delete */ },
-        onClick = { /* Handle click */ }
-    )
-}
-
 @Composable
 fun SavedCard(
     item: SavedCardItem,

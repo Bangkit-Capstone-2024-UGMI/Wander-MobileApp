@@ -36,7 +36,6 @@ import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.widgets.MyButton
 import com.bangkit.wander.presentation.saved.widgets.SavedCard
 
-@Preview(showBackground = true)
 @Composable
 fun SavedScreen(savedViewModel: SavedViewModel = viewModel()) {
     val navController = rememberNavController()

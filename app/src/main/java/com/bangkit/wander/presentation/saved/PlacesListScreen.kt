@@ -84,11 +84,3 @@ fun PlacesListScreen(
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPlacesListScreen() {
-    val navController = rememberNavController()
-
-    PlacesListScreen(navController = navController)
-}

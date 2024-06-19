@@ -123,10 +123,3 @@ fun PlaceDetailScreen(navController: NavHostController) {
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPlaceDetailScreen() {
-    val navController = rememberNavController()
-    PlaceDetailScreen(navController = navController)
-}
