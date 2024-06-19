@@ -15,9 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.bangkit.wander.app.navigation.AppRoute
+import com.bangkit.wander.data.model.Places
 
 @Composable
-fun BottomWidgetContent(onExpand: () -> Unit) {
+fun BottomWidgetContent(placeData : List<Places>, navController: NavHostController, onExpand: () -> Unit) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Latest in the area..",
@@ -42,8 +43,8 @@ fun BottomWidgetContent(onExpand: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyRow(){
-            items(items.size){ index ->
-                CardItem(index /*onClick = { navController.navigate(AppRoute.LOCATION_DETAIL)}*/)
+            items(placeData.size){ index ->
+                CardItem(items = placeData[index], onClick = { navController.navigate(AppRoute.LOCATION_DETAIL)})
             }
         }
 

@@ -41,14 +41,14 @@ class AppRoute {
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
 
-        //const val LOCATION_DETAIL = "wander/location_detail"
+        const val LOCATION_DETAIL = "wander/location_detail"
     }
 }
 
 @Composable
 fun AppNavBottomBar(navController: NavHostController, mainNavController: NavHostController) {
     NavHost(navController = navController, startDestination = "wander") {
-        composable(AppRoute.WANDER) { WanderScreen() }
+        composable(AppRoute.WANDER) { WanderScreen(mainNavController) }
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
         composable(AppRoute.FAVORITE) { SavedScreen() }
         composable(AppRoute.ACCOUNT) { ProfileScreen(navController) }
@@ -73,7 +73,7 @@ fun AppNavigation(navController: NavHostController) {
             }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
-        //composable(AppRoute.LOCATION_DETAIL) { LocationDetailScreen(navController) }
+        composable(AppRoute.LOCATION_DETAIL) { LocationDetailScreen(navController) }
     }
 }
 

@@ -10,29 +10,25 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.bangkit.wander.presentation.ViewModelFactory
-import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
-import com.bangkit.wander.presentation.search.maps.MapState
-import com.bangkit.wander.presentation.search.maps.MapViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun WanderScreen() {
+fun WanderScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val viewModel: MapViewModel = viewModel(
+    val viewModel: WanderViewModel = viewModel(
         factory = ViewModelFactory.getInstance(context)
     )
+    val placeList by viewModel.getPlaceList().observeAsState(initial = emptyList())
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
     val scaffoldState = rememberBottomSheetScaffoldState(
@@ -44,6 +40,8 @@ fun WanderScreen() {
         scaffoldState = scaffoldState,
         sheetContent = {
             BottomWidgetContent(
+                placeList,
+                navController = navController,
                 onExpand = {
                     scope.launch {
                         scaffoldState.bottomSheetState.expand()

@@ -82,9 +82,9 @@ fun LocationDetailScreen(navController : NavHostController) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = "Hotel Kurniawan", fontSize = 32.sp)
+                Text(text = "Hotel Uttara", fontSize = 32.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Cianjur", fontSize = 22.sp)
+                Text(text = "Yogyakarta", fontSize = 22.sp)
                 Spacer(modifier = Modifier.height(16.dp))
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
