@@ -4,7 +4,9 @@ package com.bangkit.wander.presentation.profile
 import com.bangkit.wander.app.widgets.MyTopAppBar
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,8 +27,6 @@ import androidx.navigation.compose.rememberNavController
 fun ProfileNameScreen(navController: NavHostController) {
     val profileViewModel: ProfileViewModel = viewModel()
     val currentUser by profileViewModel.currentUser.observeAsState()
-    val userName = currentUser?.displayName
-
     BackHandler {
         navController.popBackStack()
     }
@@ -44,21 +44,21 @@ fun ProfileNameScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = userName ?: "Name not available",
+                text = "Name",
                 fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(16.dp)
             )
+            currentUser?.let { user ->
+                user.displayName?.let { name ->
+                    Text(
+                        text = name,
+                        fontSize = 18.sp, fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProfileNameScreenPreview() {
-    val navController = rememberNavController()
-    ProfileNameScreen(navController = navController)
 }

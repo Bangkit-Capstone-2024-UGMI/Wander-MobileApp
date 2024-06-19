@@ -4,6 +4,7 @@ import com.bangkit.wander.data.repository.AuthRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseUser
 
 class ProfileViewModel(private val authRepository: AuthRepository) : ViewModel(){
@@ -15,7 +16,7 @@ class ProfileViewModel(private val authRepository: AuthRepository) : ViewModel()
         checkCurrentUser()
     }
 
-    fun checkCurrentUser() {
+    private fun checkCurrentUser() {
         _currentUser.value = authRepository.getCurrentUser()
     }
 

@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,7 +24,6 @@ import androidx.navigation.compose.rememberNavController
 fun ProfileEmailScreen(navController: NavHostController) {
     val profileViewModel: ProfileViewModel = viewModel()
     val currentUser by profileViewModel.currentUser.observeAsState()
-    val userEmail = currentUser?.email
 
     Scaffold(
         topBar = {
@@ -37,21 +37,22 @@ fun ProfileEmailScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(innerPadding)
         ) {
             Text(
-                text = userEmail ?: "Email not available",
-                fontSize = 16.sp,
+                text = "Email",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(16.dp)
             )
+            currentUser?.let { user ->
+                user.displayName?.let { name ->
+                    Text(
+                        text = name,
+                        fontSize = 18.sp, fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProfileEmailScreenPreview() {
-    val navController = rememberNavController()
-    ProfileEmailScreen(navController = navController)
 }

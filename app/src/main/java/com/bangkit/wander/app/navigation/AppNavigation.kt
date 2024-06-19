@@ -22,6 +22,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.bangkit.wander.presentation.profile.ProfileEmailScreen
+import com.bangkit.wander.presentation.profile.ProfileNameScreen
 import com.bangkit.wander.presentation.profile.ProfileScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
 import com.bangkit.wander.presentation.search.WanderScreen
@@ -39,6 +41,9 @@ class AppRoute {
         const val PLAN_DETAIL = "my_plan/plan_detail/{id}"
         const val HOTEL_DETAIL = "my_plan/create/hotel_detail"
         const val SUCCESS_CREATE = "my_plan/success_create"
+
+        const val ACCOUNT_NAME = "account/account_name"
+        const val ACCOUNT_EMAIL = "account/account_email"
     }
 }
 
@@ -70,6 +75,8 @@ fun AppNavigation(navController: NavHostController) {
             }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
+        composable(AppRoute.ACCOUNT_NAME){ ProfileNameScreen(navController)}
+        composable(AppRoute.ACCOUNT_EMAIL){ ProfileEmailScreen(navController)}
     }
 }
 

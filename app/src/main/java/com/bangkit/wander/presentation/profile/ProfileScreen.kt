@@ -28,15 +28,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.bangkit.wander.app.navigation.AppRoute
 
 @Composable
 fun ProfileScreen(navController: NavHostController) {
-    //val profileViewModel: ProfileViewModel = viewModel()
+    val profileViewModel: ProfileViewModel = viewModel()
 
     Scaffold(
         topBar = {
-            MyTopAppBar(title = "Profile",
-                showBackButton = false)
+            MyTopAppBar(
+                title = "Profile",
+                showBackButton = false
+            )
         }
     ) { innerPadding ->
 
@@ -54,19 +57,18 @@ fun ProfileScreen(navController: NavHostController) {
                 ProfileCard()
                 SettingCard(
                     string = "Name",
-                    onClick = { navController.navigate("name_setting") }
+                    onClick = { navController.navigate(AppRoute.ACCOUNT_NAME) }
                 )
                 SettingCard(
                     string = "Email",
-                    onClick = { navController.navigate("email_setting") }
+                    onClick = { navController.navigate(AppRoute.ACCOUNT_EMAIL) }
                 )
             }
 
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    //profileViewModel.signOut()
-                    //navController.navigate("login_screen")
+                    profileViewModel.signOut()
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFB3261E),
@@ -80,22 +82,6 @@ fun ProfileScreen(navController: NavHostController) {
             }
         }
     }
-}
-
-@Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "profile") {
-        composable("profile") { ProfileScreen(navController) }
-        composable("name_setting") { ProfileNameScreen(navController) }
-        composable("email_setting") { ProfileEmailScreen(navController) }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AppNavigation()
 }
 
 
