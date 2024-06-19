@@ -26,18 +26,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.bangkit.wander.data.local.TemporaryData
 
 
 @Composable
 fun PlanDetailScreen(
-    navController: NavHostController,
-    id: String
+    navController: NavHostController
 ) {
     val context = LocalContext.current
     val viewModel: HomePlanViewModel = viewModel(
         factory = ViewModelFactory.getInstance(context)
     )
-    val plan = viewModel.getPlanById(id)
+    val plan = TemporaryData.planDetail
     val planNameText by viewModel.planNameText.observeAsState(initial = plan?.title)
     val dateText by viewModel.planDateText.observeAsState(initial = plan?.date)
     val locationText by viewModel.planLocationText.observeAsState(initial = plan?.city)

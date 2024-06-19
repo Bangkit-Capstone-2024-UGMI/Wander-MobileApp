@@ -58,28 +58,8 @@ fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = AppRoute.MAIN ) {
         composable(AppRoute.MAIN) { MainScreen(mainNavController = navController, navController = rememberNavController()) }
         composable(AppRoute.CREATE_PLAN) { CreatePlanScreen(navController) }
-        composable(
-            route = AppRoute.HOTEL_LIST,
-//            arguments = listOf(
-//                navArgument("hotels_request") { type = NavType.ParcelableType(HotelsRequest::class.java)}
-//            )
-        ) {
-//            val hotelsRequest = navBackStackEntry.arguments?.getParcelable<HotelsRequest>("hotels_request")
-//            hotelsRequest?.let { request ->
-//                HotelListScreen(navController, request)
-//            }
-            HotelListScreen(navController)
-        }
-        composable(
-            route = AppRoute.PLAN_DETAIL,
-            arguments = listOf(
-                navArgument("id") { type = NavType.StringType }
-        )) { backStackEntry ->
-                val id = backStackEntry.arguments?.getString("id")
-                id?.let {
-                    PlanDetailScreen(navController, id)
-                }
-            }
+        composable(AppRoute.HOTEL_LIST) { HotelListScreen(navController) }
+        composable(AppRoute.PLAN_DETAIL) { PlanDetailScreen(navController) }
         composable(AppRoute.HOTEL_DETAIL) { HotelDetailScreen(navController)}
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
     }

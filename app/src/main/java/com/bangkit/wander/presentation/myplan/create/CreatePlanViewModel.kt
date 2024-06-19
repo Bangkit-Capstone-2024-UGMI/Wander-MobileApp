@@ -42,7 +42,7 @@ class CreatePlanViewModel (
                 val fetchedHotels = planRepository.findHotels(request)
                 _hotels.value = fetchedHotels
             } catch (e: Exception) {
-                _errorMessage.value = "Failed to fetch hotels: ${e.message}"
+                _errorMessage.value = "Failed to fetch hotels: ${e.message}. Please try again."
             } finally {
                 _loading.value = false
             }

@@ -101,7 +101,10 @@ fun HotelListScreen(
                                 ) {
                                     HotelCard(
                                         data = hotel,
-                                        onClick = { navController.navigate(AppRoute.HOTEL_DETAIL) }
+                                        onClick = {
+                                            TemporaryData.hotelDetail = hotel
+                                            navController.navigate(AppRoute.HOTEL_DETAIL)
+                                        }
                                     )
                                 }
                             }

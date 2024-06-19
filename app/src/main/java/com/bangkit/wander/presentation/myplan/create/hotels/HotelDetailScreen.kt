@@ -32,11 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.bangkit.wander.data.local.TemporaryData
 
 @Composable
 fun HotelDetailScreen(
     navController: NavHostController
 ) {
+    val hotel = TemporaryData.hotelDetail
     Scaffold (
         topBar = {
              MyTopAppBar(title = "Hotel Detail", showBackButton = true, onBackClick = { navController.popBackStack() })
@@ -78,7 +80,7 @@ fun HotelDetailScreen(
                             ) {
                                 Column {
                                     Text(
-                                        text = "Hotel Name",
+                                        text = hotel?.name ?: "Hotel Name",
                                         style = TextStyle(
                                             fontSize = 22.sp,
                                             fontWeight = FontWeight.Bold,
@@ -86,8 +88,9 @@ fun HotelDetailScreen(
                                         )
                                     )
                                     Spacer(modifier = Modifier.padding(4.dp))
+                                    val formattedDistance = String.format("%.2f", hotel?.distance?: 0.0)
                                     Text(
-                                        text = "X KM from the midpoint",
+                                        text = "$formattedDistance KM from the midpoint",
                                         style = TextStyle(
                                             fontSize = 18.sp,
                                             color = AppColor.PrimaryDark,
@@ -101,7 +104,7 @@ fun HotelDetailScreen(
                                         Icon(imageVector = Icons.Filled.Star, contentDescription ="rating", tint = AppColor.PrimaryYellow )
                                         Spacer(modifier = Modifier.padding(2.dp))
                                         Text(
-                                            text = "5.0",
+                                            text = hotel?.rating?.toString() ?: "0.0",
                                             style = TextStyle(
                                                 fontSize = 18.sp,
                                                 color = AppColor.PrimaryBlue,
@@ -139,7 +142,7 @@ fun HotelDetailScreen(
                                 )
                                 Spacer(modifier = Modifier.padding(4.dp))
                                 Text(
-                                    text = "Lunang Selatan, South Pesisir Regency, West Sumatra",
+                                    text = hotel?.formattedAddress ?: "Hotel Address",
                                     style = TextStyle(
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight(400),
