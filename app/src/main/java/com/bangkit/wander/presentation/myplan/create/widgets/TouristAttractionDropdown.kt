@@ -17,8 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.bangkit.wander.app.theme.AppColor
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.SearchByTextRequest
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,26 +49,20 @@ fun TouristAttractionDropdown(
 
     // Function to fetch places based on text search
     fun searchPlaces(query: String, callback: (List<String>) -> Unit) {
-        val placeFields = listOf(
-            Place.Field.ID,
-            Place.Field.NAME,
-            Place.Field.TYPES
-        )
-        val southWest = LatLng(-11.1894949974, 94.1480529308)
-        val northEast = LatLng(6.4787478071, 141.2574279308)
 
-        val searchByTextRequest = SearchByTextRequest.builder(query, placeFields)
-            .setMaxResultCount(100)
-            .setLocationRestriction(RectangularBounds.newInstance(southWest, northEast))
+        val autocompleteRequest = AutocompleteSessionToken.newInstance()
+        val request = FindAutocompletePredictionsRequest.builder()
+            .setSessionToken(autocompleteRequest)
+            .setQuery(query)
+            .setCountries("ID")
+            .setTypesFilter(listOf("tourist_attraction"))
             .build()
 
-        placesClient.searchByText(searchByTextRequest)
+        placesClient.findAutocompletePredictions(request)
             .addOnSuccessListener { response ->
-                var places = response.places
-                    .filter { it.types?.contains(Place.Type.TOURIST_ATTRACTION) == true }
-                    .map { it.name ?: "Unknown" }
-                if (places == null) places = emptyList()
-                onSearch(places)
+                val places = response.autocompletePredictions.map {
+                    it.getPrimaryText(null).toString()
+                }
                 Log.d("SEARCH", places.toString())
                 callback(places)
                 submitSearch = false
