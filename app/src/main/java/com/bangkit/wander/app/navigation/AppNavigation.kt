@@ -26,6 +26,8 @@ import com.bangkit.wander.data.request.HotelsRequest
 import com.bangkit.wander.presentation.profile.ProfileEmailScreen
 import com.bangkit.wander.presentation.profile.ProfileNameScreen
 import com.bangkit.wander.presentation.profile.ProfileScreen
+import com.bangkit.wander.presentation.saved.PlaceDetailScreen
+import com.bangkit.wander.presentation.saved.PlacesListScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
 import com.bangkit.wander.presentation.search.WanderScreen
 
@@ -45,6 +47,9 @@ class AppRoute {
 
         const val ACCOUNT_NAME = "account/account_name"
         const val ACCOUNT_EMAIL = "account/account_email"
+
+        const val PLACE_LIST = "saved/place_list"
+        const val PLACE_DETAIL = "saved/place_detail"
     }
 }
 
@@ -53,8 +58,10 @@ fun AppNavBottomBar(navController: NavHostController, mainNavController: NavHost
     NavHost(navController = navController, startDestination = "wander") {
         composable(AppRoute.WANDER) { WanderScreen() }
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
-        composable(AppRoute.FAVORITE) { SavedScreen() }
+        composable(AppRoute.FAVORITE) { SavedScreen(mainNavController) }
         composable(AppRoute.ACCOUNT) { ProfileScreen(mainNavController) }
+        composable(AppRoute.FAVORITE) { SavedScreen(mainNavController) }
+        composable(AppRoute.ACCOUNT) { ProfileScreen(navController) }
     }
 }
 
@@ -76,8 +83,12 @@ fun AppNavigation(navController: NavHostController) {
         composable(AppRoute.SUCCESS_CREATE) { SuccessScreen(navController) }
         composable(AppRoute.ACCOUNT_NAME){ ProfileNameScreen(navController)}
         composable(AppRoute.ACCOUNT_EMAIL){ ProfileEmailScreen(navController)}
+        composable(AppRoute.PLACE_LIST){ PlacesListScreen(navController)}
+        composable(AppRoute.PLACE_DETAIL){ PlaceDetailScreen(navController) }
+
     }
 }
+
 
 @Composable
 fun DefaultScreen(

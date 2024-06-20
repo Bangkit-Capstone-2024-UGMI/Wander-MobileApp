@@ -5,6 +5,15 @@
       <entry key="ProfileNameScreenPreview">
         <State />
       </entry>
+      <entry key="DefaultPreview">
+        <State />
+      </entry>
+      <entry key="PlaceDetailScreenPreview">
+        <State />
+      </entry>
+      <entry key="SavedScreen">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
