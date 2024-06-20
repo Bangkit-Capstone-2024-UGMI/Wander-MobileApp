@@ -30,7 +30,7 @@ fun SettingCard(string: String, onClick: () -> Unit) {
             .size(width = 360.dp, height = 60.dp)
             .padding(8.dp)
             .background(Color.White)
-            .clickable{},
+            .clickable(onClick = onClick),
         colors = CardDefaults.elevatedCardColors(Color.White)
     ) {
         Row(

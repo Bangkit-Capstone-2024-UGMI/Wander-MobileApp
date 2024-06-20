@@ -7,6 +7,7 @@ import com.bangkit.wander.presentation.main.MainActivity
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Matrix
+import android.util.Log
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels

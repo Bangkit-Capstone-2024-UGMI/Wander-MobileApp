@@ -15,7 +15,7 @@ class ProfileViewModel(private val authRepository: AuthRepository) : ViewModel()
         checkCurrentUser()
     }
 
-    fun checkCurrentUser() {
+    private fun checkCurrentUser() {
         _currentUser.value = authRepository.getCurrentUser()
     }
 

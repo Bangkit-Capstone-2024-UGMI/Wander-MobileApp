@@ -1,9 +1,6 @@
 package com.bangkit.wander.presentation.profile.widgets
 
-import com.bangkit.wander.R
 import com.bangkit.wander.presentation.profile.ProfileViewModel
-import android.graphics.Color.parseColor
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,19 +25,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.bangkit.wander.presentation.ViewModelFactory
 
 @Composable
 fun ProfileCard() {
-    //val profileViewModel: ProfileViewModel = viewModel()
-    //val currentUser by profileViewModel.currentUser.observeAsState()
-    //val userEmail = currentUser?.email
-    //val userName = currentUser?.displayName
+    val context = LocalContext.current
+    val viewModel: ProfileViewModel = viewModel(
+        factory = ViewModelFactory.getInstance(context)
+    )
+    val currentUser by viewModel.currentUser.observeAsState()
 
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
@@ -55,37 +55,50 @@ fun ProfileCard() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxSize()
         ) {
-
             Spacer(modifier = Modifier.width(16.dp))
-            // Image Container
             Box(
                 modifier = Modifier
                     .size(100.dp)
                     .clip(CircleShape)
                     .background(Color.Gray)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.img),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                )
+                currentUser?.let { user ->
+                    user.photoUrl?.let {
+                        AsyncImage(
+                            modifier = Modifier.size(100.dp).clip(CircleShape),
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(it)
+                                .crossfade(true)
+                                .build(),
+                            contentDescription = "User Image"
+                        )
+                    }
+                }
             }
-
             Spacer(modifier = Modifier.width(16.dp))
-
             Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxHeight()
-            ) {
-                Text(text = "Antonius Teddy", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxHeight()
+                ) {
+                    currentUser?.let { user ->
+                        user.displayName?.let { name ->
+                            Text(
+                                text = name,
+                                fontSize = 22.sp, fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(text = "antoniusteddy@gmail.com", fontSize = 12.sp)
+                    currentUser?.let { user ->
+                        user.email?.let { email ->
+                            Text(
+                                text = email,
+                                fontSize = 12.sp, fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
             }
         }
     }
-}
