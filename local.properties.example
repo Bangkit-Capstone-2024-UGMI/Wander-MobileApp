@@ -1,4 +1,5 @@
 sdk.dir=
-base_url=
-ml_url=
-map_key=
+BASE_URL=
+ML_URL=
+MAP_KEY=
+MAPS_API_KEY=
