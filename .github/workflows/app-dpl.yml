@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
-          tag_name: v1.0.1  
+          tag_name: v1.0.2
           release_name: Release v1.0.2
           body: |
             Changes in this Release
