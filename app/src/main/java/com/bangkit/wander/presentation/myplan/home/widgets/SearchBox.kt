@@ -31,13 +31,15 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBox() {
     val context = androidx.compose.ui.platform.LocalContext.current
     val placesClient = remember { Places.createClient(context) }
     var predictionsState by remember { mutableStateOf<List<AutocompletePrediction>>(emptyList()) }
+    var selectedPrediction by remember { mutableStateOf<AutocompletePrediction?>(null) }
+    var query by remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
             .shadow(
@@ -48,7 +50,7 @@ fun SearchBox() {
             .fillMaxWidth()
             .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(16.dp))
     ) {
-        Column (
+        Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
@@ -64,7 +66,6 @@ fun SearchBox() {
                     fontWeight = FontWeight(700),
                 )
             )
-            var query by remember { mutableStateOf("") }
             OutlinedTextField(
                 shape = CircleShape,
                 modifier = Modifier
@@ -81,8 +82,22 @@ fun SearchBox() {
                     fetchAutocompletePredictions(it, placesClient) { predictions ->
                         predictionsState = predictions
                     }
+                    // Reset selected prediction when text changes
+                    selectedPrediction = null
                 },
-                placeholder = { Text(text = "Explore amazing destinations here", style = TextStyle(color = Color(0xCC1D5D9B))) },
+                placeholder = {
+                    if (selectedPrediction == null) {
+                        Text(
+                            text = "Explore amazing destinations here",
+                            style = TextStyle(color = Color(0xCC1D5D9B))
+                        )
+                    } else {
+                        Text(
+                            text = selectedPrediction?.getFullText(null).toString(),
+                            style = TextStyle(color = Color.Black)
+                        )
+                    }
+                },
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_search),
@@ -91,27 +106,31 @@ fun SearchBox() {
                     )
                 },
             )
+
+            // Display other predictions in the list
             predictionsState.forEach { prediction ->
-                Text(
-                    text = prediction.getFullText(null).toString(),
-                    style = TextStyle(color = Color.Black),
-                    modifier = Modifier
-                        .clickable {
+                if (prediction != selectedPrediction) {
+                    Text(
+                        text = prediction.getFullText(null).toString(),
+                        modifier = Modifier.clickable {
                             fetchPlaceDetails(prediction.placeId, placesClient) { place ->
-                                // Handle the selected place (e.g., navigate to details screen)
-                                Log.d("SearchBox", "Selected place: ${place.name}")
+                                selectedPrediction = prediction
+                                query = prediction.getFullText(null).toString() // Update query with selected prediction
+                                predictionsState = emptyList() // Clear predictionsState to hide dropdown after selecting a place
                             }
-                        }
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .background(Color.White)
-                        .zIndex(1f)
-                        .border(1.dp, Color.LightGray, CircleShape)
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                )
+                        }.padding(horizontal = 16.dp, vertical = 8.dp)
+                            .background(Color.White)
+                            .zIndex(1f)
+                            .border(1.dp, Color.LightGray, CircleShape)
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                }
             }
         }
     }
 }
+
+
 
 fun fetchAutocompletePredictions(query: String, placesClient: PlacesClient, onComplete: (List<AutocompletePrediction>) -> Unit) {
     val autocompleteRequest = FindAutocompletePredictionsRequest.builder()
