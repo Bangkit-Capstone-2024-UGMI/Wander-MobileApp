@@ -18,26 +18,26 @@ class WanderService {
             ),
 
             Places(
-                placeImage = R.drawable.location,
-                placeTitle = "Hotel Uttara",
+                placeImage = R.drawable.location2,
+                placeTitle = "Hotel Artotel",
                 placeLocation = "Yogyakarta"
             ),
 
             Places(
-                placeImage = R.drawable.location,
-                placeTitle = "Hotel Uttara",
+                placeImage = R.drawable.location3,
+                placeTitle = "Hotel MM UGM",
                 placeLocation = "Yogyakarta"
             ),
 
             Places(
-                placeImage = R.drawable.location,
-                placeTitle = "Hotel Uttara",
+                placeImage = R.drawable.location4,
+                placeTitle = "Hotel Tentrem",
                 placeLocation = "Yogyakarta"
             ),
 
             Places(
-                placeImage = R.drawable.location,
-                placeTitle = "Hotel Uttara",
+                placeImage = R.drawable.location5,
+                placeTitle = "Hotel Porta",
                 placeLocation = "Yogyakarta"
             )
         )

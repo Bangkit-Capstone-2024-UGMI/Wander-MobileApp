@@ -1,6 +1,5 @@
 package com.bangkit.wander.presentation.search
 
-import androidx.compose.foundation.BorderStroke
 import com.bangkit.wander.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,7 +23,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -112,27 +110,13 @@ fun LocationDetailScreen(navController : NavHostController) {
                         onClick = { /* Handle directions click */ },
                         modifier = Modifier
                             .height(50.dp)
-                            .width(140.dp),
+                            .width(90.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFFF4D160)
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Text(text = "Directions")
-                    }
-
-                    OutlinedButton(
-                        onClick = { /* Handle start directions click */ },
-                        modifier = Modifier
-                            .width(90.dp)
-                            .height(50.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        border = BorderStroke(1.dp, Color(0xFFF4D160)),  // Custom outline color
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Color(0xFFF4D160)  // Custom text color
-                        )
-                    ) {
-                        Text(text = "Start")
+                        Text(text = "Save")
                     }
                 }
 

@@ -26,7 +26,9 @@ import kotlinx.coroutines.tasks.await
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun MapScreen() {
+fun MapScreen(
+    targetLatLng: LatLng? = null
+) {
     val context = LocalContext.current
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
 
@@ -81,11 +83,17 @@ fun MapScreen() {
             cameraPositionState = cameraPositionState,
             uiSettings = uiSettings
         ) {
-            Marker(
-                state = MarkerState(position = LatLng(-7.758196581853439, 110.38153731512409)),
-                title = "Uttara",
-                draggable = true
-            )
+            targetLatLng?.let {
+                Marker(
+                    state = MarkerState(position = it),
+                    title = "Selected Location",
+                    draggable = true
+                )
+                // Center the map on the target location
+                LaunchedEffect(it) {
+                    cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(it, 15f))
+                }
+            }
         }
     }
 }

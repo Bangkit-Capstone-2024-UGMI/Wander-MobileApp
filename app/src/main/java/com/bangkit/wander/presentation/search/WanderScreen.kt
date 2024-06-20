@@ -18,6 +18,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.bangkit.wander.presentation.ViewModelFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import com.google.android.libraries.places.api.net.PlacesClient
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -35,6 +42,10 @@ fun WanderScreen(navController: NavHostController) {
         bottomSheetState = rememberStandardBottomSheetState()
     )
     val scope = rememberCoroutineScope()
+    val placesClient: PlacesClient = Places.createClient(context)
+    var predictions by remember { mutableStateOf<List<AutocompletePrediction>>(emptyList()) }
+    var selectedPlace by remember { mutableStateOf<Place?>(null) }
+    var selectedLatLng by remember { mutableStateOf<LatLng?>(null)}
 
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -58,11 +69,27 @@ fun WanderScreen(navController: NavHostController) {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
             ) {
-                MapScreen()
+                MapScreen(selectedLatLng)
                 SearchBar(
                     modifier = Modifier.fillMaxWidth(),
                     query = text,
-                    onQueryChange = { text = it },
+                    onQueryChange = { query ->
+                        text = query
+                        if (query.isNotEmpty()) {
+                            val request = FindAutocompletePredictionsRequest.builder()
+                                .setQuery(query)
+                                .build()
+                            placesClient.findAutocompletePredictions(request)
+                                .addOnSuccessListener { response ->
+                                    predictions = response.autocompletePredictions
+                                }
+                                .addOnFailureListener { exception ->
+                                    // Handle error
+                                }
+                        } else {
+                            predictions = emptyList()
+                        }
+                    },
                     onSearch = { active = false },
                     active = active,
                     onActiveChange = { active = it },
@@ -89,9 +116,41 @@ fun WanderScreen(navController: NavHostController) {
                         }
                     }
                 ){
-                    // searchbar content
+                    Column {
+                        predictions.forEach { prediction ->
+                            Text(
+                                text = prediction.getFullText(null).toString(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                                    .clickable {
+                                        // Fetch place details when a prediction is clicked
+                                        fetchPlaceDetails(prediction.placeId, placesClient) { place ->
+                                            selectedPlace = place
+                                            selectedLatLng = place.latLng
+                                            active = false // Close the search bar
+                                            text = place.name ?: ""
+                                        }
+                                    }
+                            )
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+private fun fetchPlaceDetails(placeId: String, placesClient: PlacesClient, onPlaceFetched: (Place) -> Unit) {
+    val placeFields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS)
+    val placeRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
+
+    placesClient.fetchPlace(placeRequest)
+        .addOnSuccessListener { response ->
+            val place = response.place
+            onPlaceFetched(place)
+        }
+        .addOnFailureListener { exception ->
+            // Handle error
+        }
 }
