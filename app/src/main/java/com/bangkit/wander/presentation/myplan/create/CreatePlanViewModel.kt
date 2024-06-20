@@ -14,6 +14,8 @@ import com.bangkit.wander.data.repository.PlanRepository
 import com.bangkit.wander.data.request.HotelsRequest
 import com.bangkit.wander.data.request.PlanHotelRequest
 import com.bangkit.wander.data.request.PlanRequest
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.model.Place
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,6 +35,9 @@ class CreatePlanViewModel (
 
     private val _destinationList = MutableLiveData(listOf(""))
     val destinationList: LiveData<List<String>> = _destinationList
+
+    private val _destinationCoordinates = MutableLiveData<Map<Int, LatLng>>()
+    val destinationCoordinates: LiveData<Map<Int, LatLng>> = _destinationCoordinates
 
     private val _hotels = MutableLiveData<List<Hotel>>()
     val hotels: LiveData<List<Hotel>> = _hotels
@@ -125,6 +130,16 @@ class CreatePlanViewModel (
         currentList.add(newDestination)
         _destinationList.value = currentList
         validateForm()
+    }
+
+    fun onDestinationSelected(index: Int, place: Place) {
+        val currentDestinations = _destinationList.value.orEmpty().toMutableList()
+        currentDestinations[index] = place.name ?: ""
+        _destinationList.value = currentDestinations
+
+        val currentCoordinates = _destinationCoordinates.value.orEmpty().toMutableMap()
+        currentCoordinates[index] = place.latLng ?: LatLng(0.0, 0.0)
+        _destinationCoordinates.value = currentCoordinates
     }
 
     fun onDestinationTextChange(index: Int, newText: String) {

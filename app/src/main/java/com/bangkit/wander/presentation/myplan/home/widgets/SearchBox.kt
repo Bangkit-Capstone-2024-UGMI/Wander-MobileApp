@@ -113,7 +113,7 @@ fun SearchBox(
             .fillMaxWidth()
             .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(16.dp))
     ) {
-        Column (
+        Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
