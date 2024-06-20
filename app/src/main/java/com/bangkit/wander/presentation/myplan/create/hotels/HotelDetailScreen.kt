@@ -200,6 +200,17 @@ fun HotelDetailScreen(
                                 
                                 Spacer(modifier = Modifier.padding(8.dp))
 
+                                Text(
+                                    text = "Photos",
+                                    style = TextStyle(
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = AppColor.PrimaryDark,
+                                    )
+                                )
+
+                                Spacer(modifier = Modifier.padding(4.dp))
+
                                 if(hotel != null){
                                     PlacePhotosWidget(hotel.placeId)
                                 }
