@@ -34,6 +34,8 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.bangkit.wander.data.local.TemporaryData
 import com.bangkit.wander.presentation.myplan.create.hotels.widgets.ConfirmationDialog
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.HotelLocationMap
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.PlacePhotosWidget
 
 @Composable
 fun HotelDetailScreen(
@@ -159,6 +161,28 @@ fun HotelDetailScreen(
                                         color = AppColor.PrimaryDarkVariant,
                                     )
                                 )
+                                Spacer(modifier = Modifier.padding(8.dp))
+
+                                if (hotel != null) {
+                                    HotelLocationMap(hotel.placeId)
+                                }
+                                
+                                Spacer(modifier = Modifier.padding(8.dp))
+
+                                Text(
+                                    text = "Photos",
+                                    style = TextStyle(
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = AppColor.PrimaryDark,
+                                    )
+                                )
+
+                                Spacer(modifier = Modifier.padding(4.dp))
+
+                                if(hotel != null){
+                                    PlacePhotosWidget(hotel.placeId)
+                                }
                             }
                         }
                     }
