@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           tag_name: v1.0.1  
-          release_name: Release v1.0.1
+          release_name: Release v1.0.2
           body: |
             Changes in this Release
             - First release of the app
@@ -56,7 +56,7 @@ jobs:
         id: upload-release
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCSESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: app/build/outputs/apk/debug/app-debug.apk
