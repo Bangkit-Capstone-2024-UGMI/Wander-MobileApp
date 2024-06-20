@@ -20,7 +20,11 @@ jobs:
           java-version: '17'
       
       - name: Add environment variables to local.properties
-        run: echo 'BASE_URL=${{ secrets.BASE_URL }}\nML_URL=${{ secrets.ML_URL }}\nMAP_KEY=${{ secrets.MAP_KEY }}\nMAPS_API_KEY=${{ secrets.MAPS_API_KEY }}' > ./local.properties
+        run: |
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> local.properties
+          echo "ML_URL=${{ secrets.ML_URL }}" >> local.properties
+          echo "MAP_KEY=${{ secrets.MAP_KEY }}" >> local.properties
+          echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
