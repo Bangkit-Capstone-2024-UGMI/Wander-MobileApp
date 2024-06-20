@@ -4,7 +4,6 @@ import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.theme.AppColor
 import com.bangkit.wander.app.widgets.MyButton
 import com.bangkit.wander.app.widgets.MyTopAppBar
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -28,17 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.bangkit.wander.data.local.TemporaryData
-import com.bangkit.wander.presentation.ViewModelFactory
-import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
 import com.bangkit.wander.presentation.myplan.create.hotels.widgets.ConfirmationDialog
 
 @Composable
@@ -84,7 +78,7 @@ fun HotelDetailScreen(
                     confirmButtonText = "Yes",
                     dismissButtonText = "No"
                 )
-                LazyColumn(){
+                LazyColumn {
                     item {
                         AsyncImage(
                             model = "https://asset-a.grid.id/crop/0x0:0x0/945x630/photo/2023/06/18/staycationjpg-20230618013836.jpg",
@@ -98,52 +92,42 @@ fun HotelDetailScreen(
                     }
                     item {
                         Box(modifier = Modifier.padding(16.dp)){
-                            Row (
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
+                            Column (
+                                modifier = Modifier.fillMaxWidth()
                             ) {
-                                Column (
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Text(
-                                        text = hotel?.name ?: "Hotel Name",
-                                        style = TextStyle(
-                                            fontSize = 22.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = AppColor.PrimaryDark,
-                                        )
+                                Text(
+                                    text = hotel?.name ?: "Hotel Name",
+                                    style = TextStyle(
+                                        fontSize = 22.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = AppColor.PrimaryDark,
                                     )
-                                    Spacer(modifier = Modifier.padding(4.dp))
-                                    val formattedDistance = String.format("%.2f", hotel?.distance?: 0.0)
+                                )
+                                Spacer(modifier = Modifier.padding(4.dp))
+                                val formattedDistance = String.format("%.2f", hotel?.distance?: 0.0)
+                                Text(
+                                    text = "$formattedDistance KM from the midpoint",
+                                    style = TextStyle(
+                                        fontSize = 18.sp,
+                                        color = AppColor.PrimaryDark,
+                                    )
+                                )
+                                Spacer(modifier = Modifier.padding(4.dp))
+                                Row (
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(end = 8.dp)
+                                ) {
+                                    Icon(imageVector = Icons.Filled.Star, contentDescription ="rating", tint = AppColor.PrimaryYellow )
+                                    Spacer(modifier = Modifier.padding(2.dp))
                                     Text(
-                                        text = "$formattedDistance KM from the midpoint",
+                                        text = hotel?.rating?.toString() ?: "0.0",
                                         style = TextStyle(
                                             fontSize = 18.sp,
-                                            color = AppColor.PrimaryDark,
+                                            color = AppColor.PrimaryBlue,
+                                            fontWeight = FontWeight.Bold
                                         )
                                     )
-                                    Spacer(modifier = Modifier.padding(4.dp))
-                                    Row (
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier.padding(end = 8.dp)
-                                    ) {
-                                        Icon(imageVector = Icons.Filled.Star, contentDescription ="rating", tint = AppColor.PrimaryYellow )
-                                        Spacer(modifier = Modifier.padding(2.dp))
-                                        Text(
-                                            text = hotel?.rating?.toString() ?: "0.0",
-                                            style = TextStyle(
-                                                fontSize = 18.sp,
-                                                color = AppColor.PrimaryBlue,
-                                                fontWeight = FontWeight.Bold
-                                            )
-                                        )
-                                    }
                                 }
-                                Icon(
-                                    imageVector = Icons.Outlined.FavoriteBorder,
-                                    contentDescription = "Favorite",
-                                    tint = AppColor.PrimaryDark
-                                )
                             }
                         }
                         // divider
@@ -157,7 +141,7 @@ fun HotelDetailScreen(
                     }
                     item {
                         Box(modifier = Modifier.padding(16.dp)){
-                            Column() {
+                            Column {
                                 Text(
                                     text = "Location",
                                     style = TextStyle(

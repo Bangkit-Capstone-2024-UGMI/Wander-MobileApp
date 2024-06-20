@@ -1,8 +1,6 @@
 package com.bangkit.wander.presentation.myplan.create
 
 import android.app.DatePickerDialog
-import android.os.Bundle
-import android.util.Log
 import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.theme.AppColor
 import com.bangkit.wander.app.widgets.MyButton
@@ -17,16 +15,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -35,8 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.Navigator
-import com.google.gson.Gson
+import com.bangkit.wander.presentation.myplan.create.widgets.LocationField
+import com.bangkit.wander.presentation.myplan.create.widgets.TouristAttractionDropdown
 import java.util.Calendar
 
 @Composable
@@ -48,7 +42,6 @@ fun CreatePlanScreen(navController: NavHostController) {
 
     val planNameText by viewModel.planNameText.observeAsState(initial = "")
     val dateText by viewModel.dateText.observeAsState(initial = "")
-    val locationText by viewModel.locationText.observeAsState(initial = "")
     val destinationList by viewModel.destinationList.observeAsState(initial = listOf())
 
     val calendar = Calendar.getInstance()
@@ -117,13 +110,25 @@ fun CreatePlanScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        MyTextField(
-                            label = "Location",
-                            placeholder = "Enter your plan location",
-                            value = locationText,
-                            onValueChange = { viewModel.onLocationTextChanged(it) },
-                            icon = { Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location" )}
+                        Text(
+                            text = "Location",
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = AppColor.PrimaryDark
+                            )
                         )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        LocationField(
+                            onSelectedValue = {viewModel.onLocationTextChanged(it)}
+                        )
+//                        MyTextField(
+//                            label = "Location",
+//                            placeholder = "Enter your plan location",
+//                            value = locationText,
+//                            onValueChange = { viewModel.onLocationTextChanged(it) },
+//                            icon = { Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location" )}
+//                        )
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = "Destinations",
@@ -135,14 +140,19 @@ fun CreatePlanScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         for (i in destinationList.indices) {
-                            MyTextField(
-                                label = null,
-                                placeholder = "Find a destination",
-                                value = destinationList[i],
-                                onValueChange = { viewModel.onDestinationTextChange(i, it) },
-                                icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )},
-                                isPlanField = i!=0,
-                                onCloseField = { viewModel.removeDestination(i) }
+//                            MyTextField(
+//                                label = null,
+//                                placeholder = "Find a destination",
+//                                value = destinationList[i],
+//                                onValueChange = { viewModel.onDestinationTextChange(i, it) },
+//                                icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )},
+//                                isPlanField = i!=0,
+//                                onCloseField = { viewModel.removeDestination(i) }
+//                            )
+                            TouristAttractionDropdown(
+                                onSelectedValue = {viewModel.onDestinationTextChange(i, it)},
+                                isSelected = i!=0,
+                                onCloseField = {viewModel.removeDestination(i)}
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                         }
