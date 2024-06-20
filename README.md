@@ -5,8 +5,8 @@ In the age of digitalization and sustainability, our project revolutionizes tour
 ## 📦 Release Information
 The application has been released on GitHub and also distributed via Firebase App Distribution. You can find the links to the GitHub release and register as a tester for the Firebase distribution below:
 
-- **GitHub Release:** [Release v1.0.0](https://github.com/)
-- **Firebase App Distribution:** [Register as a Tester](https://appdistribution.firebase.dev/)
+- **GitHub Release:** [Release v1.0](https://github.com/Bangkit-Capstone-2024-UGMI/Wander-MobileApp/releases/)
+- **Firebase App Distribution:** [Register as a Tester](https://appdistribution.firebase.dev/i/57b305de59b5908c/)
 
 ## 🏢 Team Information 
 
