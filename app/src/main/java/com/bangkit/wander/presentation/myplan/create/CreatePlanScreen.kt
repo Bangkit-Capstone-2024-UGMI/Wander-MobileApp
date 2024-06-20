@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.Navigator
+import com.bangkit.wander.app.widgets.DestinationTextField
 import com.google.gson.Gson
 import java.util.Calendar
 
@@ -135,13 +136,16 @@ fun CreatePlanScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         for (i in destinationList.indices) {
-                            MyTextField(
+                            DestinationTextField(
                                 label = null,
                                 placeholder = "Find a destination",
                                 value = destinationList[i],
                                 onValueChange = { viewModel.onDestinationTextChange(i, it) },
                                 icon = { Icon(imageVector = Icons.Default.Search, contentDescription = "Location" )},
                                 isPlanField = i!=0,
+                                onPlaceSelected = { place ->
+                                    viewModel.onDestinationSelected(i, place)
+                                },
                                 onCloseField = { viewModel.removeDestination(i) }
                             )
                             Spacer(modifier = Modifier.height(8.dp))
