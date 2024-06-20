@@ -1,6 +1,5 @@
 package com.bangkit.wander.presentation.saved
 
-import androidx.compose.foundation.BorderStroke
 import com.bangkit.wander.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,7 +22,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,7 +46,7 @@ fun PlaceDetailScreen(navController: NavHostController) {
                     .height(250.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.location),
+                    painter = painterResource(id = R.drawable.location2),
                     contentDescription = "Hotel Image",
                     modifier = Modifier
                         .fillMaxSize(),
@@ -75,11 +73,11 @@ fun PlaceDetailScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = "Hotel Kurniawan", fontSize = 22.sp)
+                Text(text = "Hotel Artotel", fontSize = 22.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Cianjur", fontSize = 18.sp)
+                Text(text = "Yogyakarta", fontSize = 18.sp)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Gadog, Pacet, Cianjur Regency, West Java 43253", fontSize = 16.sp)
+                Text(text = "Jalan Kaliurang KM. 5,6 No.14, Manggung, Caturtunggal, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281", fontSize = 16.sp)
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Buttons for directions
@@ -97,21 +95,7 @@ fun PlaceDetailScreen(navController: NavHostController) {
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Text(text = "Directions")
-                    }
-
-                    OutlinedButton(
-                        onClick = { /* Handle start directions click */ },
-                        modifier = Modifier
-                            .width(90.dp)
-                            .height(50.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        border = BorderStroke(1.dp, Color(0xFFF4D160)),
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Color(0xFFF4D160)
-                        )
-                    ) {
-                        Text(text = "Start")
+                        Text(text = "Remove")
                     }
                 }
 
