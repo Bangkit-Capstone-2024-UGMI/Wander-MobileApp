@@ -1,5 +1,8 @@
 package com.bangkit.wander.presentation.myplan.create.hotels
 
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
 import com.bangkit.wander.app.navigation.AppRoute
 import com.bangkit.wander.app.theme.AppColor
 import com.bangkit.wander.app.widgets.MyButton
@@ -21,8 +24,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,13 +40,23 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.bangkit.wander.data.local.TemporaryData
-import com.bangkit.wander.presentation.ViewModelFactory
-import com.bangkit.wander.presentation.myplan.create.CreatePlanViewModel
 import com.bangkit.wander.presentation.myplan.create.hotels.widgets.ConfirmationDialog
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.HotelLocationMap
+import com.bangkit.wander.presentation.myplan.create.hotels.widgets.PlacePhotosWidget
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.PlacesClient
 
 @Composable
 fun HotelDetailScreen(
@@ -175,6 +192,17 @@ fun HotelDetailScreen(
                                         color = AppColor.PrimaryDarkVariant,
                                     )
                                 )
+                                Spacer(modifier = Modifier.padding(8.dp))
+
+                                if (hotel != null) {
+                                    HotelLocationMap(hotel.placeId)
+                                }
+                                
+                                Spacer(modifier = Modifier.padding(8.dp))
+
+                                if(hotel != null){
+                                    PlacePhotosWidget(hotel.placeId)
+                                }
                             }
                         }
                     }
