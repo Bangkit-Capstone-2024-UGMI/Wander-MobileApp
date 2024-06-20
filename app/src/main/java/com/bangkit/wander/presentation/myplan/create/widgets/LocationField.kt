@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
@@ -24,6 +25,7 @@ import com.google.android.libraries.places.api.net.SearchByTextRequest
 @Composable
 fun LocationField(
     onSelectedValue: (String) -> Unit = {},
+    value: String = ""
 ) {
     val context = LocalContext.current
     val placesClient = remember { Places.createClient(context) }
@@ -35,7 +37,7 @@ fun LocationField(
     var dropdownExpanded by remember { mutableStateOf(false) }
 
     // State for search query
-    var searchQuery by remember { mutableStateOf("") }
+    var searchQuery by remember { mutableStateOf(value) }
 
     var submitSearch by remember { mutableStateOf(false) }
 
@@ -113,6 +115,12 @@ fun LocationField(
                         contentDescription = "Search",
                     )
                 }
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.LocationOn,
+                    contentDescription = "Location",
+                )
             }
 
         )

@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -157,8 +158,8 @@ fun PlanDetailScreen(
                                     value = it.name,
                                     icon = {
                                         Icon(
-                                            imageVector = Icons.Default.Search,
-                                            contentDescription = "Location"
+                                            imageVector = Icons.Default.Place,
+                                            contentDescription = "Destination"
                                         )
                                     }
                                 )

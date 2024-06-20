@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
@@ -27,6 +28,7 @@ fun TouristAttractionDropdown(
     isSelected: Boolean = false,
     onSearch: (List<String>) -> Unit = {},
     onCloseField: () -> Unit = {},
+    value: String = ""
 ) {
     val context = LocalContext.current
     val placesClient = remember { Places.createClient(context) }
@@ -38,7 +40,7 @@ fun TouristAttractionDropdown(
     var dropdownExpanded by remember { mutableStateOf(false) }
 
     // State for search query
-    var searchQuery by remember { mutableStateOf("") }
+    var searchQuery by remember { mutableStateOf(value) }
 
     var submitSearch by remember { mutableStateOf(false) }
 
@@ -129,7 +131,13 @@ fun TouristAttractionDropdown(
                             tint = AppColor.Error
                         )
                     }
-            }
+                } else {
+                    Icon(
+                        imageVector = Icons.Filled.Place,
+                        contentDescription = "Destination"
+                    )
+                }
+
             }
         )
         Box(

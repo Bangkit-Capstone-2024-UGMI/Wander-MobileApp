@@ -42,6 +42,7 @@ fun CreatePlanScreen(navController: NavHostController) {
 
     val planNameText by viewModel.planNameText.observeAsState(initial = "")
     val dateText by viewModel.dateText.observeAsState(initial = "")
+    val locationText by viewModel.locationText.observeAsState(initial = "")
     val destinationList by viewModel.destinationList.observeAsState(initial = listOf())
 
     val calendar = Calendar.getInstance()
@@ -120,7 +121,8 @@ fun CreatePlanScreen(navController: NavHostController) {
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         LocationField(
-                            onSelectedValue = {viewModel.onLocationTextChanged(it)}
+                            onSelectedValue = {viewModel.onLocationTextChanged(it)},
+                            value = locationText
                         )
 //                        MyTextField(
 //                            label = "Location",
@@ -152,6 +154,7 @@ fun CreatePlanScreen(navController: NavHostController) {
                             TouristAttractionDropdown(
                                 onSelectedValue = {viewModel.onDestinationTextChange(i, it)},
                                 isSelected = i!=0,
+                                value = destinationList[i],
                                 onCloseField = {viewModel.removeDestination(i)}
                             )
                             Spacer(modifier = Modifier.height(8.dp))
