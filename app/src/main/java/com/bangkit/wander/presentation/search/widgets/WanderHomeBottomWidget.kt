@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,9 +13,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.bangkit.wander.app.navigation.AppRoute
+import com.bangkit.wander.data.model.Places
 
 @Composable
-fun BottomWidgetContent(onExpand: () -> Unit) {
+fun BottomWidgetContent(placeData : List<Places>, navController: NavHostController, onExpand: () -> Unit) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Latest in the area..",
@@ -38,19 +42,13 @@ fun BottomWidgetContent(onExpand: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        CardSection()
+        LazyRow(){
+            items(placeData.size){ index ->
+                CardItem(items = placeData[index], onClick = { navController.navigate(AppRoute.LOCATION_DETAIL)})
+            }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "Cafes Nearby",
-            fontSize = 22.sp,
-            fontFamily = FontFamily.SansSerif
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        CardSection()
 
     }
 }

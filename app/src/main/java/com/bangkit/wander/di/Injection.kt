@@ -7,6 +7,8 @@ import android.content.Context
 import com.bangkit.wander.core.network.ApiConfig
 import com.bangkit.wander.data.remote.HotelService
 import com.bangkit.wander.data.remote.PlanService
+import com.bangkit.wander.data.fake.WanderService
+import com.bangkit.wander.data.repository.WanderRepository
 import com.google.firebase.auth.FirebaseAuth
 
 object Injection {
@@ -24,6 +26,13 @@ object Injection {
         return PlanRepository.getInstance(
             planService = planService,
             hotelService = hotelService
+        )
+    }
+
+    fun provideWanderRepository(context: Context): WanderRepository {
+        val wanderService = WanderService()
+        return WanderRepository.getInstance(
+            wanderService = wanderService
         )
     }
 }

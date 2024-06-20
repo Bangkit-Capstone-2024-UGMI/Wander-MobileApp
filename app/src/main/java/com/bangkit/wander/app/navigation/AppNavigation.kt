@@ -29,6 +29,7 @@ import com.bangkit.wander.presentation.profile.ProfileScreen
 import com.bangkit.wander.presentation.saved.PlaceDetailScreen
 import com.bangkit.wander.presentation.saved.PlacesListScreen
 import com.bangkit.wander.presentation.saved.SavedScreen
+import com.bangkit.wander.presentation.search.LocationDetailScreen
 import com.bangkit.wander.presentation.search.WanderScreen
 
 class AppRoute {
@@ -50,13 +51,15 @@ class AppRoute {
 
         const val PLACE_LIST = "saved/place_list"
         const val PLACE_DETAIL = "saved/place_detail"
+
+        const val LOCATION_DETAIL = "wander/location_detail"
     }
 }
 
 @Composable
 fun AppNavBottomBar(navController: NavHostController, mainNavController: NavHostController) {
     NavHost(navController = navController, startDestination = "wander") {
-        composable(AppRoute.WANDER) { WanderScreen() }
+        composable(AppRoute.WANDER) { WanderScreen(mainNavController) }
         composable(AppRoute.MY_PLAN){ MyPlanScreen(mainNavController) }
         composable(AppRoute.FAVORITE) { SavedScreen(mainNavController) }
         composable(AppRoute.ACCOUNT) { ProfileScreen(mainNavController) }
@@ -86,6 +89,7 @@ fun AppNavigation(navController: NavHostController) {
         composable(AppRoute.PLACE_LIST){ PlacesListScreen(navController)}
         composable(AppRoute.PLACE_DETAIL){ PlaceDetailScreen(navController) }
 
+        composable(AppRoute.LOCATION_DETAIL) { LocationDetailScreen(navController) }
     }
 }
 
