@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig{
     companion object {
-        private const val baseURL: String = BuildConfig.BASE_URL
-        private const val mlURL: String = BuildConfig.ML_URL
+        private val baseURL: String = BuildConfig.BASE_URL
+        private val mlURL: String = BuildConfig.ML_URL
         fun <T> getApiService(service: Class<T>): T {
             val client = OkHttpsClientFactory.create()
             return Retrofit.Builder()
