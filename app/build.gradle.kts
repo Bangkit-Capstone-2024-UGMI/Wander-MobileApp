@@ -122,4 +122,7 @@ dependencies {
 
     // For permission handling
     implementation ("com.google.accompanist:accompanist-permissions:0.27.0")
+
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.0.0"))
+    implementation("com.google.android.libraries.places:places:3.5.0")
 }

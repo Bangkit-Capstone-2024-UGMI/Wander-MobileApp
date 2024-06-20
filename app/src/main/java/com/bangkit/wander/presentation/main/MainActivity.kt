@@ -15,6 +15,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import com.bangkit.wander.BuildConfig
+import com.google.android.libraries.places.api.Places
 
 class MainActivity : ComponentActivity() {
 
@@ -38,6 +40,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        Places.initializeWithNewPlacesApiEnabled(applicationContext, BuildConfig.MAP_KEY)
         setupAction()
         setContent {
             AppTheme {
