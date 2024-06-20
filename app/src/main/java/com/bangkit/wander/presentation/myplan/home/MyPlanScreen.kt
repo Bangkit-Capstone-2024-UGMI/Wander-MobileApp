@@ -75,7 +75,7 @@ fun MyPlanScreen(navController: NavHostController) {
                             .fillMaxWidth()
                             .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
                     ) {
-                        SearchBox()
+                        SearchBox(navController)
                     }
                     PlanList(navController)
                 }

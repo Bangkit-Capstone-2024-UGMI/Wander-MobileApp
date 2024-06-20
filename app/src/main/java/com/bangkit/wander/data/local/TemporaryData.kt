@@ -9,4 +9,5 @@ object TemporaryData {
     var hotelsRequest : HotelsRequest? = null
     var hotelDetail: Hotel? = null
     var newPlan: Plan? = null
+    var searchDestination: String? = null
 }

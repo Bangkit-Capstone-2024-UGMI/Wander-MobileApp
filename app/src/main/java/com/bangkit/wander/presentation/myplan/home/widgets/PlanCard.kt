@@ -91,18 +91,18 @@ fun PlanCard(data: Plan, onClick: () -> Unit) {
                     style = TextStyle(fontSize = 14.sp, color = AppColor.PrimaryDark)
                 )
             }
-             IconButton(
-                 onClick = { /*TODO*/ },
-                 modifier = Modifier
-                     .size(40.dp)
-                     .padding(end = 16.dp)
-             ) {
-                 Icon(
-                     painter = painterResource(id = R.drawable.ic_share),
-                     contentDescription = "Share Icon",
-                     tint = AppColor.PrimaryDark
-                 )
-             }
+//             IconButton(
+//                 onClick = { /*TODO*/ },
+//                 modifier = Modifier
+//                     .size(40.dp)
+//                     .padding(end = 16.dp)
+//             ) {
+//                 Icon(
+//                     painter = painterResource(id = R.drawable.ic_share),
+//                     contentDescription = "Share Icon",
+//                     tint = AppColor.PrimaryDark
+//                 )
+//             }
         }
     }
 }

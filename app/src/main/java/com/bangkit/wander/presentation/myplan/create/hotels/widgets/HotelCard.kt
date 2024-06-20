@@ -114,7 +114,7 @@ fun HotelCard(data: Hotel, onClick: () -> Unit){
                         )
                     )
                     Text(
-                        text = "from the midpoint",
+                        text = "Avarage Distance",
                         style = TextStyle(
                             fontSize = 14.sp,
                             color = AppColor.PrimaryBlue,

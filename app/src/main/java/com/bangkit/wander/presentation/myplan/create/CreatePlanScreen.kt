@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.bangkit.wander.data.local.TemporaryData
 import com.bangkit.wander.presentation.myplan.create.widgets.LocationField
 import com.bangkit.wander.presentation.myplan.create.widgets.TouristAttractionDropdown
 import java.util.Calendar
@@ -40,10 +41,16 @@ fun CreatePlanScreen(navController: NavHostController) {
         factory = ViewModelFactory.getInstance(context)
     )
 
+
     val planNameText by viewModel.planNameText.observeAsState(initial = "")
     val dateText by viewModel.dateText.observeAsState(initial = "")
     val locationText by viewModel.locationText.observeAsState(initial = "")
     val destinationList by viewModel.destinationList.observeAsState(initial = listOf())
+
+    if (TemporaryData.searchDestination != null) {
+        viewModel.onDestinationTextChange(0, TemporaryData.searchDestination!!)
+        TemporaryData.searchDestination = null
+    }
 
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)

@@ -106,7 +106,7 @@ fun HotelDetailScreen(
                                 Spacer(modifier = Modifier.padding(4.dp))
                                 val formattedDistance = String.format("%.2f", hotel?.distance?: 0.0)
                                 Text(
-                                    text = "$formattedDistance KM from the midpoint",
+                                    text = "$formattedDistance KM Average Distance",
                                     style = TextStyle(
                                         fontSize = 18.sp,
                                         color = AppColor.PrimaryDark,
